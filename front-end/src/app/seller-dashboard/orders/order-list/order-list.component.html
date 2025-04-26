@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="card-title">Orders</h5>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <select class="form-select" [(ngModel)]="statusFilter" (change)="applyFilters()">
+          <option value="all">All Orders</option>
+          <option *ngFor="let status of ORDER_STATUSES">{{status}}</option>
+        </select>
+      </div>
+      <div *ngIf="loading" class="text-center p-4">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="error" class="alert alert-danger">
+        {{error}}
+      </div>
+      <div *ngIf="!loading && !error && filteredOrders.length > 0" class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredOrders">
+              <td>{{order._id}}</td>
+              <td>{{order.customerDetails.firstName}} {{order.customerDetails.lastName}}</td>
+              <td>${{order.totalPrice}}</td>
+              <td>
+                <div class="dropdown">
+                  <button [class]="'btn btn-sm ' + getStatusButtonClass(order.status)" 
+                          type="button" 
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false">
+                    {{order.status}}
+                    <i class="bi bi-chevron-down ms-1"></i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li *ngFor="let status of ORDER_STATUSES">
+                      <button class="dropdown-item" 
+                              [class.active]="status === order.status"
+                              (click)="changeOrderStatus(order, status)">
+                        {{status}}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-info" (click)="viewDetails(order)">
+                  <i class="bi bi-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div *ngIf="!loading && !error && filteredOrders.length === 0" class="text-center p-4">
+        <p class="text-muted">No orders found</p>
+      </div>
+    </div>
+  </div>
+</div>

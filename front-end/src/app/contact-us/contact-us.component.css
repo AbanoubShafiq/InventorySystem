@@ -1,0 +1,8 @@
+/* Optional custom styles */
+.bi-pinterest, .bi-twitter, .bi-facebook {
+    font-size: 1.2rem;
+  }
+  
+  .text-danger {
+    font-size: 0.875rem;
+  }

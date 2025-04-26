@@ -1,0 +1,102 @@
+<mat-nav-list>
+  <div class="logo py-3">
+    <h1>SUP-ADMIN</h1>
+  </div>
+  <mat-divider></mat-divider>
+  
+  <h2 matSubheader class="mt-2"><span class="subheader">APPLICATIONS</span></h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="dashboard">
+    <mat-icon>dashboard</mat-icon><span>Dashboard</span>
+  </a>
+  
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="users">
+    <mat-icon>group</mat-icon><span>Users</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="sellers">
+    <mat-icon>storefront</mat-icon><span>Sellers</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="sales-clerks">
+    <mat-icon>badge</mat-icon><span>Sales Clerk</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="cashiers">
+    <mat-icon>point_of_sale</mat-icon><span>Cashier</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="products">
+    <mat-icon>shopping_bag</mat-icon><span>Products</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="mainInventories">
+    <mat-icon>inventory_2</mat-icon><span>Main Inventory</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="branches">
+    <mat-icon>store</mat-icon><span>Branches</span>
+  </a>
+  
+  <mat-list>
+    <mat-list-item (click)="toggleOnlineBranch()">
+      <mat-icon>public</mat-icon>
+      <span>Online Branch</span>
+      <mat-icon *ngIf="showMenu">expand_less</mat-icon>
+      <mat-icon *ngIf="!showMenu">expand_more</mat-icon>
+    </mat-list-item>
+  
+    <div *ngIf="showMenu" class="submenu">
+      <a mat-list-item [routerLink]="['subInventory', 'Ecommerce']" routerLinkActive="list-item-active">
+        <mat-icon>shopping_cart</mat-icon>
+        <span>Products</span>
+      </a>
+  
+      <a mat-list-item routerLink="orders" routerLinkActive="list-item-active">
+        <mat-icon>receipt_long</mat-icon>
+        <span>Orders</span>
+      </a>
+    </div>
+  </mat-list>
+  
+
+  <a mat-list-item (click)="toggleSubMenu()">
+    <mat-icon>business</mat-icon><span>Offline Branches</span>
+    <mat-icon>{{ showSubMenu ? 'expand_less' : 'expand_more' }}</mat-icon>
+  </a>
+  
+  <!-- Show all branches -->
+  <div *ngIf="showSubMenu" class="submenu">
+    <ng-container *ngFor="let branch of branches">
+      <a mat-list-item (click)="toggleBranchMenu(branch, $event)">
+        <mat-icon>location_on</mat-icon><span>{{ branch.branchName }}</span>
+        <mat-icon>{{ branch.showSubSubMenu ? 'expand_less' : 'expand_more' }}</mat-icon>
+      </a>
+  
+      <!-- Show "Products" & "Orders" links inside branch -->
+      <div *ngIf="branch.showSubSubMenu" class="submenu">
+        <a mat-list-item [routerLink]="['subInventory', branch.branchName]" routerLinkActive="list-item-active">
+          <mat-icon>shopping_cart</mat-icon><span>Products</span>
+        </a>
+        <a mat-list-item [routerLink]="['orders',branch._id]" routerLinkActive="list-item-active">
+          <mat-icon>receipt_long</mat-icon><span>Orders</span>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="distReq">
+    <mat-icon>local_shipping</mat-icon><span>Distripution Request</span>
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="categories">
+    <mat-icon>category</mat-icon><span>Categories</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="reviews">
+    <mat-icon>star_rate</mat-icon><span>Reviews</span>
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="contact-us">
+    <mat-icon>support_agent</mat-icon><span>Contact-Us</span>
+  </a>
+</mat-nav-list>

@@ -1,0 +1,103 @@
+
+<div class="background-container">
+  <div class="overlay"></div>
+
+</div>
+<div class="content">
+
+<div class="container-fluid" style="max-width: 1200px;">
+  <div class="card">
+    <div class="row">
+      <div class="col-md-4 summary">
+        <select class="form-select form-select-sm" aria-label="Payment method" [(ngModel)]="paymentMethod">
+          <option value="Cash">Cash</option>
+          <option value="Card">Card</option>
+          <option value="Online">Online</option>
+        </select>
+        <p>COMMENTS</p>
+        <input id="comments" class="form-control form-control-sm" placeholder="Add a comment to your order" [(ngModel)]="comments">
+        <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+          <div class="col">TOTAL PRICE With Delivery</div>
+          <div class="col text-right">&euro; {{ data?.Total + 5 }}</div>
+        </div>
+        <p>EXPECTED DELIVERY TIME: 3-5 Days</p>
+        <button (click)="placeOrder()" class="btn btn-primary btn-sm checkout" style="width: 100%;">Place Order</button>
+      </div>
+      <div class="col-md-8 cart">
+        <div class="title">
+          <div class="row">
+            <div class="col">
+              <h4><b>Billing Details</b></h4>
+            </div>
+            <div class="col align-self-center text-right text-muted">
+              {{ data?.items?.length || 0 }} items
+            </div>
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of data?.items; trackBy: trackByProductId">
+                  <td>{{ item.subInventory.product.name }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>&euro; {{ item.subInventory.product.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="firstName">First Name</label>
+              <input id="firstName" class="form-control form-control-sm" placeholder="First Name" [(ngModel)]="firstName">
+            </div>
+            <div class="col">
+              <label for="lastName">Last Name</label>
+              <input id="lastName" class="form-control form-control-sm" placeholder="Last Name" [(ngModel)]="lastName">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <label for="governorate">Governorate</label>
+              <select id="governorate" class="form-select form-select-sm" (change)="onGovernorateChange($event)" [(ngModel)]="selectedGovernorate">
+                <option value="" disabled selected>Select Governorate</option>
+                <option *ngFor="let gov of governorates" [value]="gov.name">{{ gov.name }}</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="city">City</label>
+              <select id="city" class="form-select form-select-sm" [(ngModel)]="city">
+                <option value="" disabled selected>Select City</option>
+                <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input id="address" class="form-control form-control-sm" placeholder="Address" [(ngModel)]="address">
+            </div>
+            <div class="col">
+              <input id="street" class="form-control form-control-sm" placeholder="Street" [(ngModel)]="street">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input id="zipCode" class="form-control form-control-sm" placeholder="Zip Code" [(ngModel)]="zipCode">
+            </div>
+            <div class="col">
+              <input id="phoneNumber" class="form-control form-control-sm" placeholder="Phone Number" [(ngModel)]="phoneNumber">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <input id="email" class="form-control form-control-sm" placeholder="Email" [(ngModel)]="email">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

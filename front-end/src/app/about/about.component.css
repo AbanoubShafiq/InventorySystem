@@ -1,0 +1,207 @@
+.about-us-section {
+    background-color: #f8f9fa;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.our-story img {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.why-choose-us {
+    background-color: #f1f1f1;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.cta-section {
+    background-color: #007bff;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.social-media {
+    background-color: #f8f9fa;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+    transition: transform 0.3s;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+.social-icon i {
+    font-size: 24px;
+}
+
+.text-primary {
+    color: #2D525B !important;
+}
+
+.text-muted {
+    color: #6c757d !important;
+}
+
+.who-we-are {
+    background-color: #f8f9fa;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.who-we-are h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.team-member {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.team-member img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border: 4px solid #007bff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.team-member h5 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.team-member p {
+    color: #6c757d;
+}
+
+.team-member .lead {
+    font-size: 1rem;
+    color: #555;
+}
+
+.free-shipping {
+    background-color: #f1f1f1;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.free-shipping img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.free-shipping h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.free-shipping p {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.wide-selection {
+    background-color: #f8f9fa;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.wide-selection img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.wide-selection h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.wide-selection p {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.high-quality {
+    background-color: #f1f1f1;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    text-align: center;
+}
+
+.high-quality img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
+.high-quality h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.high-quality p {
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .team-member img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .team-member h5 {
+        font-size: 1.2rem;
+    }
+
+    .who-we-are h2 {
+        font-size: 2rem;
+    }
+    
+    .free-shipping img,
+    .wide-selection img,
+    .high-quality img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .free-shipping h3,
+    .wide-selection h3,
+    .high-quality h3 {
+        font-size: 1.5rem;
+    }
+
+    .free-shipping p,
+    .wide-selection p,
+    .high-quality p {
+        font-size: 1rem;
+    }
+}
+
+

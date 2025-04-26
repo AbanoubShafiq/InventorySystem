@@ -1,0 +1,84 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Products</h2>
+    <button class="btn btn-primary" (click)="onAddProduct()">
+      Add New Product
+    </button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loading">
+          <td colspan="7" class="text-center">Loading products...</td>
+        </tr>
+        <tr *ngIf="!loading && products.length === 0">
+          <td colspan="7" class="text-center">No products found</td>
+        </tr>
+        <tr *ngFor="let product of products">
+          <td>
+            <img [src]="product.images[0] || 'assets/no-image.png'" 
+                 alt="Product image" 
+                 class="img-thumbnail"
+                 style="width: 50px; height: 50px; object-fit: cover;">
+          </td>
+          <td>{{product.name}}</td>
+          <td>{{product.categoryId.name}}</td>
+          <td>{{product.price | currency}}</td>
+          <td>{{product.quantity}}</td>
+          <td>
+            <span class="badge" 
+                  [class.bg-success]="product.isActive"
+                  [class.bg-danger]="!product.isActive">
+              {{product.isActive ? 'Active' : 'Inactive'}}
+            </span>
+          </td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-outline-primary me-2" 
+                      (click)="onEditProduct(product)">
+                <i class="fas fa-edit"></i> Edit
+              </button>
+              <button class="btn btn-sm" 
+                      [class.btn-outline-danger]="product.isActive"
+                      [class.btn-outline-success]="!product.isActive"
+                      (click)="toggleProductStatus(product)">
+                {{product.isActive ? 'Deactivate' : 'Activate'}}
+              </button>
+              <app-delete-product 
+                [productId]="product._id"
+                [productName]="product.name"
+                (deleted)="onProductDeleted()">
+              </app-delete-product>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-add-product 
+  [show]="showAddModal"
+  (close)="onModalClosed()"
+  (saved)="onProductSaved()">
+</app-add-product>
+
+<app-edit-product 
+  *ngIf="selectedProduct"
+  [show]="showEditModal"
+  [product]="selectedProduct"
+  (close)="onModalClosed()"
+  (saved)="onProductSaved()">
+</app-edit-product>

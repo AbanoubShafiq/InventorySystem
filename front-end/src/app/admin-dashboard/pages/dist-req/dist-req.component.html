@@ -1,0 +1,139 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">DistReqs</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div>
+        <div>
+          <div class="container-fluid p-4">
+            <!-- Stats Cards -->
+            <div class="row mb-4 text-center justify-content-around">
+              <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Total DistReqs</h5>
+                    <p class="card-text display-4">{{distReqs.length}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-warning text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Pending DistReqs</h5>
+                    <p class="card-text display-4">{{pendingDistReqCount}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Approved DistReqs</h5>
+                    <p class="card-text display-4">{{approveDistReqCount}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Rejected DistReqs</h5>
+                    <p class="card-text display-4">{{rejectDistReqCount}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- *********************************************************************** -->
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0"></h3>
+                </div>
+                <div class="col-auto">
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="row mb-3 justify-content-between">
+                <div class="col-md-4">
+                  <input type="text" 
+                          class="form-control" 
+                          [(ngModel)]="searchTerm" 
+                          (input)="onSearch()"
+                          placeholder="Search Date...">
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" 
+                          [(ngModel)]="statusFilter" 
+                          (change)="onStatusFilterChange()">
+                    <option value="all">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="rejected">Rejected</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Manager</th>
+                      <th>Branch</th>
+                      <th>Qty</th>
+                      <th>Message</th>
+                      <th>Status</th>
+                      <th  (click)="sort('createdAt')" style="cursor: pointer" class="justify-content-between">
+                        Date
+                        <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                    </th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let distReq of filteredDistReqs">
+                      <td><img class="image" src="{{distReq?.productDetails!.images[0]}}" alt="">{{distReq.productDetails.name}}</td>
+                      <td>{{distReq.branchManager.firstName}} {{distReq.branchManager.lastName}}</td>
+                      <td>{{distReq.branchDetails.branchName}}</td>
+                      <td>{{distReq.requestedQuantity}}</td>
+                      <td>{{distReq.message}}</td>
+                      <td>
+                        <span class="badge" 
+                        [ngClass]="{
+                        'bg-warning': distReq.status === 'pending',
+                        'bg-success': distReq.status === 'approved',
+                        'bg-danger': distReq.status === 'rejected'
+                            }">
+                        {{ distReq.status }}
+                        </span>
+                      </td>
+                      <td>{{distReq.createdAt}}</td>
+                      <td>
+                        <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                          <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="bg-white ">
+                          <button mat-menu-item (click)="deleteDistReq(distReq._id)">
+                            <mat-icon>delete</mat-icon>
+                            Delete
+                          </button>
+                          <ng-container *ngIf="distReq.status === 'pending'">
+                            <button mat-menu-item (click)="changeDistReqStatus(distReq._id, 'approved')">
+                              <mat-icon>check</mat-icon> Approve
+                            </button>
+                            <button mat-menu-item (click)="changeDistReqStatus(distReq._id, 'rejected')">
+                              <mat-icon>close</mat-icon> Reject
+                            </button>
+                          </ng-container>                             
+                        </mat-menu>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

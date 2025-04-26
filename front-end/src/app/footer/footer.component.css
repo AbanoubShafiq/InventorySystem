@@ -1,0 +1,22 @@
+/* Footer Background */
+footer {
+    background-color: #f8f9fa;
+  }
+  
+  /* Newsletter Input Group */
+  .input-group {
+    max-width: 300px;
+  }
+  
+  /* Social Media Icons */
+  .bi-pinterest, .bi-twitter, .bi-facebook {
+    font-size: 1rem;
+  }
+  
+  /* Hover Effect for Links */
+  a.text-dark:hover {
+    text-decoration: underline;
+  }
+  img {
+    max-width: 50px;
+  }

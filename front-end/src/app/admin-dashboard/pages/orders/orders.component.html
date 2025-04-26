@@ -1,0 +1,175 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2">Orders</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div>
+      <div>
+        <div class="container-fluid p-4">
+          <!-- Stats Cards -->
+          <div class="row mb-4 text-center justify-content-around">
+            <div class="col-md-2">
+              <div class="card bg-primary text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Total<br> Orders</h5>
+                  <p class="card-text display-6">{{orders.length}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-warning text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Pending Orders</h5>
+                  <p class="card-text display-6">{{pendingOrdersCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-success text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Shipped Orders</h5>
+                  <p class="card-text display-6">{{shippedOrdersCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-danger text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Caneled Orders</h5>
+                  <p class="card-text display-6">{{canceledOrdersCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-info text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Refunded Orders</h5>
+                  <p class="card-text display-6">{{refundedOrdersCount}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- *********************************************************************** -->
+        <div class="card">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0"></h3>
+              </div>
+              <div class="col-auto">
+                <app-details-order
+                  [show]="showDetailsModal" 
+                  [orderData]="orderData" 
+                  (close)="showDetailsModal = false" >
+                </app-details-order>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="row mb-3 justify-content-between">
+              <div class="col-md-4">
+                <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="searchTerm" 
+                        (input)="onSearch()"
+                        placeholder="Search Orders...">
+              </div>
+              <div class="col-md-3">
+                <select class="form-select" 
+                        [(ngModel)]="statusFilter" 
+                        (change)="onStatusFilterChange()">
+                  <option value="all">All Status</option>
+                  <option value="pending">Pending</option>
+                  <option value="shipped">Shipped</option>
+                  <option value="cancelled">Cancelled</option>
+                  <option value="refunded">Refunded</option>
+                </select>
+              </div>
+            </div>
+      
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                      <th>Id</th>
+                      <th (click)="sort('customerDetails')" style="cursor: pointer" class="justify-content-between">
+                        Customer
+                        <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                      </th>
+                      <th>Items</th>
+                      <th>Price</th>
+                      <th>Date</th>
+                      <th>Nots</th>
+                      <th>Payment</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <td>{{order._id}}</td>
+                    <td>{{ order.customerDetails.firstName }} {{ order.customerDetails.lastName }}</td>
+                    <td>{{order.items.length}} item</td>
+                    <td>${{order.totalPrice}}</td>
+                    <td>{{order.date}}</td>
+                    <td>{{order.notes}}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{
+                        'bg-success': order.paymentMethod === 'Cash',
+                        'bg-warning': order.paymentMethod === 'Card',
+                        'bg-info': order.paymentMethod === 'Online'
+                      }">
+                        {{ order.paymentMethod }}
+                      </span>                      
+                    </td>
+                    <td>
+                      <span class="badge"
+                      [ngClass]="{
+                        'bg-warning': order.status === 'pending',
+                        'bg-primary': order.status === 'shipped',
+                        'bg-danger': order.status === 'cancelled',
+                        'bg-success': order.status === 'refunded'
+                      }">
+                  {{ order.status }}
+                </span>
+                    </td>
+                    <td>
+                      <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                        <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" class="bg-white ">
+                        <button *ngIf="order.status === 'pending'" mat-menu-item (click)="changeStatusOrder(order._id, 'shipped')">
+                        <mat-icon>local_shipping</mat-icon>
+                        Shipped
+                        </button>
+
+                        <button *ngIf="order.status === 'pending'" mat-menu-item (click)="changeStatusOrder(order._id, 'cancelled')">
+                        <mat-icon>close</mat-icon>
+                        Cancel
+                        </button>
+
+                        <button *ngIf="order.status === 'pending'" mat-menu-item (click)="changeStatusOrder(order._id, 'refunded')">
+                        <mat-icon>money_off</mat-icon>
+                        Refund
+                        </button>
+
+                        <button *ngIf="order.status === 'shipped'" mat-menu-item (click)="changeStatusOrder(order._id, 'refunded')">
+                        <mat-icon>money_off</mat-icon>
+                        Refund
+                        </button>
+
+                        <button mat-menu-item (click)="openDetailsModal(order)">
+                          <mat-icon>visibility</mat-icon>
+                          Details
+                        </button>    
+                      </mat-menu>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

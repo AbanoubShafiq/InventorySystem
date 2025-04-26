@@ -1,0 +1,188 @@
+
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img 
+          class="rounded-circle mt-5" 
+          width="150px" 
+          [src]="userProfileForm.get('image')?.value ? userProfileForm.get('image')?.value : 'https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg'"
+          alt="User Image"
+        >
+        <span class="font-weight-bold mt-3">{{userProfileForm.get('firstName')?.value}} {{userProfileForm.get('lastName')?.value}}</span>
+        <span class="text-black-50">{{userProfileForm.get('email')?.value}}</span>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile Settings</h4>
+        </div>
+        <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="labels">First Name</label>
+              <input type="text" class="form-control" placeholder="First name" formControlName="firstName">
+              <div *ngIf="userProfileForm.get('firstName')?.invalid && userProfileForm.get('firstName')?.touched" class="text-danger">
+                First Name is required.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label class="labels">Last Name</label>
+              <input type="text" class="form-control" placeholder="Last name" formControlName="lastName">
+              <div *ngIf="userProfileForm.get('lastName')?.invalid && userProfileForm.get('lastName')?.touched" class="text-danger">
+                Last Name is required.
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels">Email</label>
+              <input type="text" class="form-control" formControlName="email">
+              <div *ngIf="userProfileForm.get('email')?.invalid && userProfileForm.get('email')?.touched" class="text-danger">
+                <div *ngIf="userProfileForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="userProfileForm.get('email')?.errors?.['email']">Invalid email format.</div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="governorate">Governorate:</label>
+              <select id="governorate" class="form-control" formControlName="state">
+                <option value="">-- Select Governorate --</option>
+                <option *ngFor="let gov of governorates" [value]="gov.id">{{ gov.governorate_name_en }}</option>
+              </select>
+              <input type="hidden" formControlName="stateName">
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="city">City:</label>
+              <select id="city" class="form-control" formControlName="city">
+                <option value="">-- Select City --</option>
+                <option *ngFor="let city of cities" [value]="city.id">{{ city.city_name_en }}</option>
+              </select>
+              <input type="hidden" formControlName="cityName">
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="street">Street:</label>
+              <input id="street" class="form-control" formControlName="street">
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="zipCode">Zip Code:</label>
+              <input id="zipCode" class="form-control" formControlName="zipCode">
+              <div *ngIf="userProfileForm.get('zipCode')?.invalid && userProfileForm.get('zipCode')?.touched" class="text-danger">
+                <div *ngIf="userProfileForm.get('zipCode')?.errors?.['pattern']">Invalid zip code format.</div>
+              </div>
+            </div>
+            <div class="col-md-12 mt-3">
+              <label for="contactNo">Contact Number:</label>
+              <input id="contactNo" class="form-control" formControlName="contactNo">
+              <div *ngIf="userProfileForm.get('contactNo')?.invalid && userProfileForm.get('contactNo')?.touched" class="text-danger">
+                <div *ngIf="userProfileForm.get('contactNo')?.errors?.['pattern']">Invalid contact number format.</div>
+              </div>
+            </div>
+            <!-- <div class="col-md-12 mt-3">
+              <label for="image">Profile Image URL:</label>
+              <input id="image" type="text" class="form-control" formControlName="image">
+            </div> -->
+
+
+            <div class="col-md-12 mt-3">
+              <label for="image">Profile Image Upload:</label>
+              <input id="image" type="file" class="form-control" (change)="onFileChange($event)">
+              <div *ngIf="userProfileForm.get('image')?.invalid && userProfileForm.get('image')?.touched" class="text-danger">
+                Image file is required.
+              </div>
+            </div>
+
+          </div>
+          <div class="mt-5 text-center">
+            <button type="submit" class="btn btn-primary profile-button">Save Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+
+    <!-- <div class="container-fluid mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <button [routerLink]="['/user/userprofile/complaints', id]" class="btn btn-primary">
+          Complaint
+        </button>
+        <button [routerLink]="['/user/userprofile/orders', id]" class="btn btn-primary">
+          Orders
+        </button>
+      </div>
+      <router-outlet></router-outlet>
+    </div> -->
+
+    <!-- <div class="container-fluid mt-4">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="image-button" style="background-image: url('path-to-men-image.jpg');">
+            <a [routerLink]="['/user/userprofile/complaints', id]" class="overlay-text">
+              Complaints
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="image-button" style="background-image: url('path-to-women-image.jpg');">
+            <a [routerLink]="['/user/userprofile/orders', id]" class="overlay-text">
+              Orders
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+
+    <!-- <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6 col-12 p-0">
+          <div class="image-button d-flex justify-content-center align-items-center vh-100" 
+               style="background: url('./../../../assets/complaint/complaint.jpg') no-repeat center center/cover;">
+            <a [routerLink]="['/user/userprofile/complaints', id]" class="overlay-text text-white fs-3 fw-bold">
+              Complaints
+            </a>
+          </div>
+        </div>
+        <div class="col-md-6 col-12 p-0">
+          <div class="image-button d-flex justify-content-center align-items-center vh-100" 
+               style="background: url('./../../../assets/orders/orders.jpg') no-repeat center center/cover;">
+            <a [routerLink]="['/user/userprofile/orders', id]" class="overlay-text text-white fs-3 fw-bold">
+              Orders
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    
+    <div class="container-fluid p-0">
+      <div class="row g-0">
+        <!-- Complaints Section -->
+        <div class="col-md-6 col-12">
+          <a [routerLink]="['/user/userprofile/complaints', id]" class="full-page-link complaints">
+            <div class="overlay">
+              <span class="text">Complaints</span>
+            </div>
+          </a>
+        </div>
+    
+        <!-- Orders Section -->
+        <div class="col-md-6 col-12">
+          <a [routerLink]="['/user/userprofile/orders', id]" class="full-page-link orders">
+            <div class="overlay">
+              <span class="text">Orders</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+
+    <router-outlet></router-outlet>
+
+
+  </div>
+</div>

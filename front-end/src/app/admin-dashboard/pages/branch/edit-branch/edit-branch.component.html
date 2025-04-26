@@ -1,0 +1,73 @@
+<div class="modal" [class.show]="show" [style.display]="show ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Branch</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+            <div class="row mb-2">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" placeholder="Enter first name"  [(ngModel)]="branchData.branchName" name="Name"
+                  required  minlength="3" pattern="^[A-Za-z]+$" #Name="ngModel" [class.is-invalid]="Name.invalid &&Name.touched">
+
+              <div *ngIf="Name.invalid &&Name.touched" class="invalid-feedback">
+                  <span *ngIf="Name.errors?.['required']">First name is required.</span>
+                  <span *ngIf="Name.errors?.['minlength']">First name must be at least 3 characters long.</span>
+                  <span *ngIf="Name.errors?.['pattern']">First name can only contain letters.</span>
+              </div>                 
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Location</label>
+            <input type="text" class="form-control" placeholder="Location" 
+                [(ngModel)]="branchData.location" name="Location" required #Location="ngModel"
+                [class.is-invalid]="Location.invalid && Location.touched">
+            <div *ngIf="Location.invalid && Location.touched" class="invalid-feedback">
+                Location is required.
+            </div>
+        </div>
+        
+
+        <div class="row mb-2">
+          <div class="col-6">
+            <label class="form-label">Phone</label>
+            <input type="text" class="form-control" placeholder="Phone"
+                [(ngModel)]="branchData.contactNumber" name="Phone" required #Phone="ngModel"
+                pattern="^[0-9]{10,15}$"
+                [class.is-invalid]="Phone.invalid && Phone.touched">
+            
+            <div *ngIf="Phone.invalid && Phone.touched" class="invalid-feedback">
+                <span *ngIf="Phone.errors?.['required']">Phone number is required.</span>
+                <span *ngIf="Phone.errors?.['pattern']">Enter a valid phone number (10-15 digits).</span>
+            </div>
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Type</label>
+            <select class="form-select" [(ngModel)]="branchData.type" name="Type" required #TypeRef="ngModel"
+                    [class.is-invalid]="TypeRef.invalid && TypeRef.touched">
+                
+                <option value="" disabled>Select Type</option> 
+                <option value="online">Online</option>
+                <option value="offline">Offline</option>
+          
+            </select>
+          
+            <div *ngIf="TypeRef.invalid && TypeRef.touched" class="invalid-feedback">
+                Type is required.
+            </div>
+          </div>                
+          
+        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Update Branch</button>
+          </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

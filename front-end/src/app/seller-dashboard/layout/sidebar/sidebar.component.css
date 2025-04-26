@@ -1,0 +1,60 @@
+ .sidebar {
+    width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #00004d;  /* Darker blue */
+  color: white;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.brand-logo {
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-logo h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 1px;
+}
+
+.nav-item {
+  margin: 0.5rem 0;
+}
+
+.nav-link {
+  padding: 0.8rem 1.5rem;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  margin: 0 0.5rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white !important;
+  transform: translateX(5px);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important;
+  font-weight: 500;
+}
+
+.nav-link i {
+  width: 20px;
+  text-align: center;
+  margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+.nav {
+  padding: 1rem 0.5rem;
+}

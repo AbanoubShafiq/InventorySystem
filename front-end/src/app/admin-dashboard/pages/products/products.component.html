@@ -1,0 +1,181 @@
+<div class="container-fluid page">
+  <div class="d-flex page__box p-3 mt-2">Products</div>
+  <div class="page__content shadow p-3 position-relative">
+    <div>
+      <div>
+        <div class="container-fluid p-4">
+          <!-- Stats Cards -->
+          <div class="row mb-4 text-center justify-content-around">
+            <div class="col-md-2">
+              <div class="card bg-primary text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Total Products</h5>
+                  <p class="card-text display-6">{{products.length}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-success text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Active Products</h5>
+                  <p class="card-text display-6">{{activeProductsCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-danger text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Inactive Products</h5>
+                  <p class="card-text display-6">{{inactiveproductCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-info text-white">
+                <div class="card-body">
+                  <h5 class="card-title">InStock Products</h5>
+                  <p class="card-text display-6">{{inStockProductsCount}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card bg-warning text-white">
+                <div class="card-body">
+                  <h5 class="card-title">Out Of Stock</h5>
+                  <p class="card-text display-6">{{outOfStockProductsCount}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- *********************************************************************** -->
+        <div class="card">
+          <div class="card-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h3 class="mb-0"></h3>
+              </div>
+              <div class="col-auto">
+                <button class="btn btn-primary" (click)="openAddModal()">
+                  Add Product
+                </button>
+                <app-add-product 
+                  [show]="showAddModal" 
+                  [productData]="productData" 
+                  (close)="showAddModal = false" 
+                  (saved)="onProductSaved()">
+                </app-add-product>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="row mb-3 justify-content-between">
+              <div class="col-md-4">
+                <input type="text" 
+                        class="form-control" 
+                        [(ngModel)]="searchTerm" 
+                        (input)="onSearch()"
+                        placeholder="Search Product...">
+              </div>
+              <div class="col-md-3">
+                <select class="form-select" 
+                        [(ngModel)]="statusFilter" 
+                        (change)="onStatusFilterChange()">
+                  <option value="all">All Status</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+            <app-update-product
+              [show]="showEditModal" 
+              [productData]="productData" 
+              (updated)="onProductUpdated()" 
+              (close)="showEditModal = false">
+            </app-update-product> 
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th (click)="sort('name')" style="cursor: pointer">
+                      Name
+                      <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                    </th>
+                    <th>Category</th>
+                    <th>Seller</th>
+                    <th>Sales</th>
+                    <th (click)="sort('price')" style="cursor: pointer">
+                      Price
+                      <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                    </th>
+                    <th>Qty</th>
+                    <th>Stock</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of filteredProducts">
+                    <td><img class="image" src="{{product.images[0]}}" alt="">{{product.name}}</td>
+                    <td>{{product.categoryId.name}}</td>
+                    <td>{{product.sellerId.firstName}} {{product.sellerId.lastName}}</td>
+                    <td>{{product.noOfSale}}</td>
+                    <td>${{product.price}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>
+                      <span class="badge" [ngClass]="product.quantity > 0 ? 'bg-info' : 'bg-secondary'">
+                        {{ product.quantity > 0 ? 'In Stock' : 'Out Of Stock' }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge" [ngClass]="product.isActive ? 'bg-success' : 'bg-danger'">
+                        {{product.isActive ? ' Active ' : 'Inactive'}}
+                      </span>
+                    </td>
+                    <td>
+                      <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                        <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                      </button>
+                      <mat-menu #menu="matMenu" class="bg-white ">
+                        <button mat-menu-item (click)="openEditModal(product)">
+                          <mat-icon>edit</mat-icon>
+                          Update
+                        </button>
+                        <app-update-product 
+                          *ngIf="showEditModal" 
+                          [productData]="productData" 
+                          (updated)="onProductUpdated()" 
+                          (close)="showEditModal = false">
+                        </app-update-product> 
+                        <button mat-menu-item (click)="deleteProduct(product!._id)">
+                          <mat-icon>delete</mat-icon>
+                          Delete
+                        </button>
+                        <button mat-menu-item (click)="toggleProductStatus(product)">
+                          <mat-icon>{{ product.isActive ? 'close' : 'check' }}</mat-icon>
+                          {{ product.isActive ? 'Inactive' : 'Active' }}
+                        </button>                        
+                        <!-- <button mat-menu-item>
+                          <mat-icon>wysiwyg</mat-icon>
+                          Reviews
+                        </button> -->
+                        <button mat-menu-item (click)="createMainInventory(product._id)">
+                          <mat-icon>inventory_2</mat-icon>
+                          MainInventory
+                        </button>
+                        <button mat-menu-item (click)="createProdReq(product._id,product.sellerId._id)">
+                          <mat-icon>product</mat-icon>
+                          prodReq
+                        </button>
+                      </mat-menu>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="modal" [class.show]="show" [style.display]="show ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Offline Order Details</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Order ID</label>
+              <input type="text" class="form-control" [(ngModel)]="orderOfflineData._id" name="orderId" disabled>
+            </div>
+  
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Total Price</label>
+                <input type="text" class="form-control" [(ngModel)]="orderOfflineData.totalPrice" name="totalPrice" disabled>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-bold">Status</label>
+                <input type="text" class="form-control" [(ngModel)]="orderOfflineData.status" name="status" disabled>
+              </div>
+            </div>
+          </form>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Branch Name</label>
+              <input type="text" class="form-control" [(ngModel)]="orderOfflineData.branch.branchName" name="branchName" disabled>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">Date</label>
+              <input type="text" class="form-control" [(ngModel)]="orderOfflineData.date" name="date" disabled>
+            </div>
+          </div>
+  
+          <div class="table-responsive mt-3">
+            <table class="table table-striped">
+              <thead class="table-primary text-white">
+                <tr>
+                  <th class="p-3">Name</th>
+                  <th class="p-3">Price</th>
+                  <th class="p-3">Count</th>
+                  <th class="p-3">seller</th>
+                  <th class="p-3">category</th>
+                  <th class="p-3">Qty</th>
+                  <th class="p-3">Sum</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of orderOfflineData.items" class="align-middle">
+                  <td class="p-2 border-bottom"><img class="image" src="{{item?.productDetails!.images[0]}}" alt="">{{ item.productDetails.name }}</td>
+                  <td class="p-2 border-bottom">{{ item.productDetails.price }}</td>
+                  <td class="p-2 border-bottom">{{ item.productDetails.noOfSale}}</td>
+                  <td class="p-2 border-bottom">{{ item.productDetails.sellerId.firstName }} {{ item.productDetails.sellerId.lastName }}</td>
+                  <td class="p-2 border-bottom">{{ item.productDetails.categoryId.name }}</td>
+                  <td class="p-2 border-bottom">{{ item.quantity }}</td>
+                  <td class="p-2 border-bottom">{{ item.quantity*item.price }}</td>
+                </tr>
+              </tbody>
+            </table>
+              
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="onClose()">Close</button>
+              </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  

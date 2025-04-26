@@ -1,0 +1,49 @@
+.card {
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-box {
+  width: 300px;
+}
+
+.form-select {
+  width: 150px;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.badge {
+  padding: 0.5em 0.75em;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.5rem;
+}

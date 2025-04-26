@@ -1,0 +1,327 @@
+body{
+    background: white;
+    min-height: 100vh;
+    vertical-align: middle;
+    display: flex;
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0 ;
+
+}
+.container{
+    margin: 50px auto;
+    margin-bottom: 300px;
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+}
+.title{
+    margin-bottom: 5vh;
+}
+.card{
+    margin: auto;
+    max-width: 1300px;
+    margin: 20px auto;
+    width: 100%;
+    box-shadow: 0 6px 20px 0 #00003f;
+    border-radius: 1rem;
+    border: transparent;
+    color: #00003f;
+
+}
+@media(max-width:767px){
+    .card{
+        margin: 3vh auto;
+    }
+}
+.cart{
+    background-color: white;
+    padding: 4vh 5vh;
+    border-bottom-left-radius: 1rem;
+    border-top-left-radius: 1rem;
+
+}
+@media(max-width:767px){
+    .cart{
+        padding: 4vh;
+        border-bottom-left-radius: unset;
+        border-top-right-radius: 1rem;
+    }
+}
+.summary{
+    background-color: #00003f;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 4vh;
+    color: rgb(255, 255, 255);
+}
+@media(max-width:767px){
+    .summary{
+    border-top-right-radius: unset;
+    border-bottom-left-radius: 1rem;
+    }
+}
+.summary .col-2{
+    padding: 0;
+}
+.summary .col-10
+{
+    padding: 0;
+}.row{
+    margin: 0;
+}
+.title b{
+    font-size: 1.5rem;
+}
+.main{
+    margin: 0;
+    padding: 2vh 0;
+    width: 100%;
+}
+.col-2, .col{
+    padding: 0 1vh;
+}
+a{
+    padding: 0 1vh;
+}
+.close{
+    margin-left: auto;
+    font-size: 0.7rem;
+}
+img{
+    width: 3.5rem;
+}
+.back-to-shop{
+    margin-top: 4.5rem;
+}
+h5{
+    margin-top: 4vh;
+}
+hr{
+    margin-top: 1.25rem;
+}
+form{
+    padding: 2vh 0;
+}
+select{
+    border: 1px solid rgba(60, 58, 54, 0.682);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    background-color: rgb(247, 247, 247);
+}
+input:focus::-webkit-input-placeholder
+{
+      color:transparent;
+}
+.btn{
+    background-color: #00003f;
+    border-color: #00003f;
+    color: white;
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    margin-top: 4vh;
+    padding: 1vh;
+    border-radius: 5px;
+}
+
+.btn:hover{
+    background-color:rgba(255, 255, 255, 0.555);
+    color: #00003f;
+    border: white;
+}
+a{
+    color: black; 
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+}
+ #code{
+    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253) , rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+    background-repeat: no-repeat;
+    background-position-x: 95%;
+    background-position-y: center;
+}/* تخصيص حجم الأزرار بشكل أصغر */
+/* تخصيص حجم الأزرار بشكل أكبر قليلاً */
+.btn-sm, .quantity-btn {
+    font-size: 30px;      /* تكبير حجم الخط قليلاً */
+    padding: 6px 42px;     /* تكبير الحواف */
+    margin: 3px 8px ;
+    height: auto;         /* الحفاظ على الارتفاع المناسب */
+    width: auto;          /* الحفاظ على العرض المناسب */
+}
+
+/* تخصيص زر الإزالة ليكون لونه أحمر */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* تخصيص زر الإزالة في حالة .close */
+.close {
+    font-size: 24px;  /* تكبير حجم الخط قليلاً */
+    color: #dc3545;
+    background-color: transparent; 
+    border: none;
+    font-weight: bold;  /* تحديد اللون الأحمر */
+}
+table.table-bordered.table-hover {
+    border-color: #ddd;
+    border-radius: 2rem;
+    width: 100%; /* التأكد من أن الجدول يستخدم العرض الكامل */
+    overflow-x: auto; /* السماح بالتمرير الأفقي في الشاشات الصغيرة */
+}
+
+@media (max-width: 767px) {
+    /* تخصيص الجدول ليتناسب مع الشاشات الصغيرة */
+    table.table-bordered.table-hover th,
+    table.table-bordered.table-hover td {
+        padding: 1vh;
+        font-size: 0.8rem;
+    }
+    
+    /* جعل الأعمدة تصطف بشكل عمودي في الشاشات الصغيرة */
+    .summary {
+        padding: 2vh 3vh;
+    }
+}
+
+/* تخصيص select داخل الـ summary */
+select.form-select.form-select-sm {
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(60, 58, 54, 0.682);
+    padding: 1.5vh 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+select.form-select.form-select-sm:hover {
+    background-color: #e0e0e0;
+}
+
+/* تخصيص input داخل الـ summary */
+input.form-control.form-control-sm {
+    background-color: rgb(247, 247, 247);
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    width: 100%;
+}
+
+input.form-control.form-control-sm:focus {
+    background-color: #f0f0ff;
+    border-color: #00003f;
+}
+
+/* تخصيص زر الإزالة */
+.close {
+    font-size: 24px;
+    color: #dc3545;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #c82333;
+}
+
+/* تخصيص زر Quantity */
+.quantity-btn {
+    background-color: #00003f;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 6px 32px;
+    height: auto;
+    width: auto;
+    color: #f0f0ff;
+}
+
+.quantity-btn:hover {
+    background-color: transparent;
+    color: #00003f;
+    border: 1px solid #00003f;
+}
+
+/* تخصيص زر Checkout */
+.checkout {
+    background-color: #f0f0ff;
+    color: #00003f;
+}
+
+.checkout:hover {
+    background-color: transparent;
+    border: 1px solid #f0f0ff;
+    color: #f0f0ff;
+}
+.position-relative {
+    position: relative;
+  }
+  
+  .fixed-bottom-cart {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width:20%;
+    background-color: 00003f;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd;
+  }
+  @media (max-width: 768px) {
+    .back {
+     display: none;
+
+    }
+    .back-to-shop{
+        background-color: transparent;
+        border: none;
+    }
+    .back-to-shop a{
+        font-size: 30px;
+    }
+}
+.sidebar-header {
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    height: 60px;
+  }
+  .back-button {
+    background-color: white;
+    color: #00003f;
+    transition: all 0.3s ease;
+    width: 100px;
+    height: 40px;
+    margin-top: -8px;
+  }
+  
+  .back-button:hover {
+    background-color: #00003f;
+    color:white ;
+    border: 1px solid white;
+  }
+  

@@ -1,0 +1,247 @@
+/* Hero Section */
+/* .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x400?text=Hero+Image');
+    background-size: cover;
+    background-position: center;
+    color: white;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+  } */
+   /* Hero Section */
+/* Hero Section */
+/* Hero Section Styling */
+.hero {
+  background: url('../../../public/assets/panner/f.webp') no-repeat center center;
+  background-size: contain; 
+  background-color: #f8f9fa; 
+  height: 380px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  color: blueviolet; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+/* Gradient Overlay for Better Readability */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; 
+}
+
+/* Hero Content */
+.hero .container {
+  z-index: 2; 
+  position: relative; 
+  text-align: center; 
+  max-width: 600px; 
+}
+
+/* Text Styling */
+.hero h1 {
+  font-size: 3rem; 
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333; 
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #555; 
+}
+
+/* Button Styling */
+.hero button {
+  background-color: blue;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero button:hover {
+  background-color: blueviolet;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .hero {
+    background-size: cover;
+  }
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  .hero p {
+    font-size: 1rem;
+  }
+  .hero button {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+  
+  /* Card Styling */
+  .featured-perfumes img,
+  .new-arrivals img {
+    height: 400px;
+    object-fit: cover;
+  }
+  
+  .card {
+    transition: transform 0.3s ease-in-out;
+  }
+  .cardProduct {
+    transition: transform 0.3s ease-in-out;
+    height: 566px;
+  }
+  .card-title {
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+    overflow: hidden; /* Hide any overflowing text */
+    text-overflow: ellipsis; /* Add an ellipsis (...) for truncated text */
+    max-width: 100%; /* Ensure the title fits within the card */
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Categories Section */
+  .categories img {
+    height: 200px;
+    object-fit: contain;
+  }
+  
+  .categories .card {
+    border: none;
+  }
+  
+  .categories .card:hover {
+    border: 2px solid #007bff;
+  }
+  
+  /* Customer Reviews */
+  .customer-reviews .rating {
+    margin-top: 10px;
+  }
+  
+  .bi-star-fill {
+    font-size: 1.2rem;
+  }
+  
+  /* Brands Section */
+  .brands img {
+    margin: 10px auto;
+    /* border: 1px solid #ddd; */
+    padding: 5px;
+    border-radius: 8px;
+    width: 110px;
+    height: 80px;
+    
+  }
+  
+  /* Blog Section */
+  .blog img {
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .blog .card {
+    /* border: none; */
+  }
+  
+  .blog .card:hover {
+    border: 2px solid #28a745;
+  }
+  
+  /* Call-to-Action Section */
+  .cta {
+    background-color: #343a40;
+  }
+  
+  .cta h3 {
+    font-size: 2rem;
+  }
+  
+  .cta p {
+    font-size: 1.1rem;
+  }
+  
+  .cta .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+  }
+  
+  .cta .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+
+  /*  */
+
+  /* X Factor Section */
+.x-factor {
+    background-color: #f8f9fa; /* Light gray background */
+  }
+  
+  .x-factor .card {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .x-factor .card:hover {
+    transform: translateY(-10px); /* Subtle hover effect */
+  }
+  
+  .x-factor i {
+    font-size: 3rem; /* Large icons */
+  }
+  
+  .x-factor h5 {
+    font-size: 1.25rem; /* Medium-sized title */
+    margin-bottom: 1rem;
+  }
+  
+  .x-factor p {
+    font-size: 1rem; /* Standard paragraph size */
+   
+    color: #6c757d; /* Muted gray text */
+  }
+
+  #back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: none; /* Hidden by default */
+  z-index: 100;
+  border: none;
+  outline: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: opacity 0.3s ease;
+}
+
+#back-to-top:hover {
+  background-color: #0056b3;
+}
+
+#back-to-top.show {
+  display: block; /* Show the button when the condition is met */
+}

@@ -1,0 +1,35 @@
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="fw-bold">User Complaints</h4>
+      <button class="btn btn-primary" routerLink="/home">
+        <i class="fa fa-plus"></i> Add Complaint
+      </button>
+    </div>
+    <!-- Complaint Summary Section -->
+    <div class="mb-3 p-3 bg-light rounded shadow-sm">
+      <h5 class="fw-bold">Complaint Summary</h5>
+      <p><strong>Total Complaints:</strong> {{noOfComplaints}}</p>
+    </div>
+
+    <div class="mb-3 p-3 bg-white rounded shadow-sm">
+      <h5 class="fw-bold">Complaints</h5>
+      <ul class="list-group">
+        <li *ngIf="userComplaints.length === 0" class="list-group-item text-center">
+          No complaints available.
+        </li>
+        <li *ngFor="let complaint of userComplaints" class="list-group-item d-flex justify-content-between align-items-center">
+          <span>Complaint #{{ complaint._id }} - {{ complaint.subject }}</span>
+          <button class="btn btn-primary btn-sm view-complaint" (click)="viewComplaint(complaint)">
+            View Details
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+

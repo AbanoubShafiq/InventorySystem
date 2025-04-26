@@ -1,0 +1,134 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Categories</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div>
+        <div>
+          <div class="container-fluid p-4">
+            <!-- Stats Cards -->
+            <div class="row mb-4 text-center justify-content-around">
+              <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Categories</h5>
+                    <p class="card-text display-4">{{categories.length}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Active Categories</h5>
+                    <p class="card-text display-4">{{activeCategriesCount}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Inactive Categories</h5>
+                    <p class="card-text display-4">{{inactiveCategoriesCount}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- *********************************************************************** -->
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0"></h3>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-primary" (click)="openAddModal()">
+                    Add category
+                  </button>
+                  <app-add-category 
+                    [show]="showAddModal" 
+                    [categoryData]="categoryData" 
+                    (close)="showAddModal = false" 
+                    (saved)="onCategorySaved()">
+                  </app-add-category>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="row mb-3 justify-content-between">
+                <div class="col-md-4">
+                  <input type="text" 
+                          class="form-control" 
+                          [(ngModel)]="searchTerm" 
+                          (input)="onSearch()"
+                          placeholder="Search Categories...">
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" 
+                          [(ngModel)]="statusFilter" 
+                          (change)="onStatusFilterChange()">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+  
+              <app-edit-category
+                [show]="showEditModal" 
+                [categoryData]="categoryData" 
+                (updated)="onCategoryUpdated()" 
+                (close)="showEditModal = false">
+              </app-edit-category>
+        
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th (click)="sort('name')" style="cursor: pointer" class="justify-content-between">
+                        Name
+                        <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                      </th>
+                      <th>Description</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let category of filteredCategories">
+                      <td><img class="image" src="{{category.image}}" alt="">{{category.name}}</td>
+                      <td>{{category.description}}</td>
+                      <td>{{category.createdAt}}</td>
+                      <td>
+                        <span class="badge" [ngClass]="category.isActive ? 'bg-success' : 'bg-danger'">
+                          {{category.isActive ? ' Active ' : 'Inactive'}}
+                        </span>
+                      </td>
+                      <td>
+                        <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                          <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="bg-white ">
+                          <button mat-menu-item (click)="openEditModal(category)">
+                            <mat-icon>edit</mat-icon>
+                            Update
+                          </button>
+                          <button mat-menu-item (click)="deleteCategory(category._id)">
+                            <mat-icon>delete</mat-icon>
+                            Delete
+                          </button>
+                          <button mat-menu-item (click)="toggleCategoryStatus(category._id)">
+                            <mat-icon>{{ category.isActive ? 'close' : 'check' }}</mat-icon>
+                            {{ category.isActive ? 'Inactive' : 'Active' }}
+                          </button>     
+                        </mat-menu>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "reset-categories": "node scripts/reset-categories-api.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@angular/common": "^19.1.4",
+    "@faker-js/faker": "^9.4.0",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "express-fileupload": "^1.5.1",
+    "express-list-routes": "^1.2.4",
+    "express-validator": "^7.2.1",
+    "imagekit": "^6.0.0",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.5",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.9",
+    "stripe": "^17.6.0",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

@@ -1,0 +1,155 @@
+<div class="analytics-container">
+  <div class="row mb-4">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+              <label class="form-label">Start Date</label>
+              <input type="date" class="form-control" [(ngModel)]="startDate" [max]="endDate">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">End Date</label>
+              <input type="date" class="form-control" [(ngModel)]="endDate" [min]="startDate">
+            </div>
+            <div class="col-md-4">
+              <button class="btn btn-primary w-100" (click)="loadAnalytics()" [disabled]="loading">
+                <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+                Update Analytics
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+
+  <ng-container *ngIf="analytics && !loading">
+    <div class="row mb-4">
+      <div class="col-md-3">
+        <div class="card bg-primary text-white">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2">Total Orders</h6>
+            <h3 class="card-title mb-0">{{analytics.summary.totalOrders}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-success text-white">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2">Total Sales</h6>
+            <h3 class="card-title mb-0">{{analytics.summary.totalSales}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-info text-white">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2">Total Revenue</h6>
+            <h3 class="card-title mb-0">${{analytics.summary.totalRevenue | number:'1.2-2'}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card bg-warning text-white">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2">Average Order</h6>
+            <h3 class="card-title mb-0">${{analytics.summary.averageOrderValue | number:'1.2-2'}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <canvas #salesChart></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <canvas #salesTrendChart></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-8 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <canvas #productsChart></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <canvas #revenueChart></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Top Performing Products</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Units Sold</th>
+                    <th>Revenue</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of analytics.topProducts">
+                    <td>{{product.name}}</td>
+                    <td>{{product.sales}}</td>
+                    <td>${{product.revenue | number:'1.2-2'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title mb-0">Sales Metrics</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Average Order Value
+                <span class="badge bg-primary rounded-pill">${{analytics.summary.averageOrderValue | number:'1.2-2'}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Total Orders
+                <span class="badge bg-success rounded-pill">{{analytics.summary.totalOrders}}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Total Units Sold
+                <span class="badge bg-info rounded-pill">{{analytics.summary.totalSales}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

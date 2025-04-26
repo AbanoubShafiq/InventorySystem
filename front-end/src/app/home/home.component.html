@@ -1,0 +1,262 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold">Discover Your Signature Scent</h1>
+    <p class="lead">
+      Explore our exclusive collection of premium perfumes crafted for you.
+    </p>
+    <button class="btn btn-primary btn-lg" (click)="goBackToCatalog()">Shop Now</button>
+  </div>
+</section>
+
+<!-- Back to Top Button -->
+<button
+  id="back-to-top"
+  class="btn btn-primary"
+  (click)="scrollToTop()"
+  [ngClass]="{ 'show': showBackToTop }"
+>
+  <i class="bi bi-arrow-up"></i> 
+</button>
+<!-- <section class="hero py-5 "  style="height: 100vh;" (click)="goBackToCatalog()" id="sales">
+  <div class="container text-center "   >
+    <h1 class="display-4 fw-bold" style="margin-top:-10px ;">Discover Your Signature Scent</h1>
+    <p class="lead">
+      Explore our exclusive collection of premium perfumes crafted for you.
+    </p>
+    <button class="btn btn-primary btn-lg" (click)="goBackToCatalog()" style="background-color: blueviolet;">Shop Now</button>
+  </div>
+</section> -->
+<!--   
+  <!-- Featured Perfumes Section -->
+  <!-- <section class="featured-perfumes py-5">
+    <div class="container">
+      <h2 class="text-center mb-4" style="color: rgb(91, 23, 155);">Featured Perfumes</h2>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let perfume of perfumes">
+          <div class="card shadow-sm">
+            <img [src]="perfume.image" class="card-img-top" alt="{{ perfume.name }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ perfume.name }}</h5>
+              <p class="fw-bold">${{ perfume.price.toFixed(2) }}</p>
+              <div class="rating" style="margin-bottom: 10px;">
+                <span *ngFor="let star of Array(perfume.rating).fill(0)" >
+                  <i class="bi bi-star-fill text-warning"></i>
+                </span>
+              </div>
+              <a routerLink="catalog/details/{{perfume.id}}"  class="btn btn-primary">Add to Cart</a>
+              <a (click)="goBackToCatalog()"  class="btn btn-primary">Add to Cart</a>
+              <button class="btn btn-primary">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>  -->
+
+    <!-- best sales -->
+    <section class="featured-perfumes py-5">
+      <div class="container">
+        <h2 class="text-center mb-4" style="color: rgb(91, 23, 155);">Featured Perfumes</h2>
+        <div class="row">
+          <div class="col-md-3" *ngFor="let product of bestSales">
+            <div class="card cardProduct shadow-sm">
+              <img [src]="product.productImage" class="card-img-top" alt="{{ product.productName }}"  />
+              <div class="card-body">
+                <h5 class="card-title">{{ product.productName }}</h5>
+                <p class="fw-bold">${{ product.productPrice.toFixed(2) }}</p>
+                <div class="rating" style="margin-bottom: 10px;">
+                  <!-- <span *ngFor="let star of Array(product.rating).fill(0)" >
+                    <i class="bi bi-star-fill text-warning"></i>
+                  </span> -->
+                  
+                </div>
+                <!-- <a routerLink="catalog/details/{{perfume.id}}"  class="btn btn-primary">Add to Cart</a> -->
+                <!-- <a routerLink="details/{{product._id}}"   class="btn btn-primary">Add to Cart</a> -->
+                <!-- <a (click)="goBackToDetails(product._id)" class="btn btn-warning">View Details</a> -->
+
+                <button class="btn btn-primary" (click)="goBackToDetails(product._id)">View Details</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+  <!-- Categories Section -->
+  <section class="categories py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Explore Our Categories</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let category of categories">
+          <div class="card shadow-sm text-center">
+            <!-- <img src="{{category.image}}" class="card-img-top" alt="{{ category.name }}" /> -->
+            <!-- <img src="download.jpg" class="card-img-top" alt="{{ category.name }}" /> -->
+            <img [src]="category.image" class="card-img-top" alt="{{ category.name }}" />            <div class="card-body">
+              <h5 class="card-title">{{ category.name }}</h5>
+              <a (click)="goBackToCategory(category.name)" class="btn btn-outline-primary">View More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- New Arrivals Section -->
+  <!-- <section class="new-arrivals py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">New Arrivals</h2>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let perfume of newArrivals">
+          <div class="card shadow-sm">
+            <img [src]="perfume.image" class="card-img-top" alt="{{ perfume.name }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ perfume.name }}</h5>
+              <p class="fw-bold">${{ perfume.price.toFixed(2) }}</p>
+              <a (click)="goBackToCatalog()" class="btn btn-warning">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+  
+  <!-- New Arrivals D Section -->
+  <section class="new-arrivals py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">New Arrivals</h2>
+      <div class="row">
+        <div class="col-md-3" *ngFor="let product of newArrivalsD">
+          <div class="card cardProduct shadow-sm">
+            <img [src]="product.productImage" class="card-img-top" alt="{{ product.productName }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ product.productName }}</h5>
+              <p class="fw-bold">${{ product.productPrice.toFixed(2) }}</p>
+              <button class="btn btn-primary" (click)="goBackToDetails(product._id)">View Details</button>
+
+              <!-- <a (click)="goBackToDetails(product._id)" class="btn btn-warning">View Details</a> -->
+              <!-- <a routerLink="details/{{product._id}}" class="btn btn-warning">View Details</a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Customer Reviews Section -->
+  <section class="customer-reviews py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">What Our Customers Say</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let review of reviews">
+          <div class="card shadow-sm" style="margin-top: 5px;">
+            <div class="card-body">
+              <p class="card-text">{{ review.comment }}</p>
+              <p class="fw-bold text-muted">— {{ review.customerName }}</p>
+              <div class="rating">
+                <span *ngFor="let star of Array(review.rating).fill(0)">
+                  <i class="bi bi-star-fill text-warning"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Brands We Love Section -->
+  <section class="brands py-5">
+    <div class="container text-center">
+      <h2>Brands We Love</h2>
+      <div class="row mt-4">
+        <div class="col-md-2" *ngFor="let brand of brands">
+          <img 
+            src='{{brand.imgPath}}' 
+            alt="{{ brand.name }}" 
+            class="img-fluid"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Blog Section -->
+  <section class="blog py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">Fragrance Tips & Trends</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let post of blogPosts">
+          <div class="card shadow-sm">
+            <img [src]="post.image" class="card-img-top" alt="{{ post.title }}" />
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.excerpt }}</p>
+              <a href="#" class="btn btn-success">Read More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Call-to-Action Section -->
+  <section class="cta py-5 bg-dark text-white text-center">
+    <div class="container">
+      <h3>Find Your Perfect Fragrance Today!</h3>
+      <p>Sign up for exclusive offers and discounts on your favorite perfumes.</p>
+      <button class="btn btn-success btn-lg" (click)="goBackToUserReg()">Subscribe Now</button>
+    </div>
+  </section>
+
+
+
+  <!-- X Factor Section -->
+<section class="x-factor py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center mb-4">The X Factor</h2>
+      <p class="text-center lead mb-5">Why choose us? Here's what makes us stand out!</p>
+  
+      <div class="row g-4">
+        <!-- Card 1: Price Match Guarantee -->
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-cash-stack text-primary fs-1 mb-3"></i>
+              <h5 class="card-title">Price Match Guarantee</h5>
+              <p class="card-text">
+                We guarantee the lowest prices. If you find it cheaper, we'll match it!
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card 2: Free Shipping -->
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-truck text-success fs-1 mb-3"></i>
+              <h5 class="card-title">Free Shipping</h5>
+              <p class="card-text">
+                Enjoy free shipping on all orders over $50. No hidden fees!
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Card 3: Satisfaction Guaranteed -->
+        <div class="col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <i class="bi bi-check-circle text-danger fs-1 mb-3"></i>
+              <h5 class="card-title">Satisfaction Guaranteed</h5>
+              <p class="card-text">
+                Love it or send it back. We offer hassle-free returns and refunds.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

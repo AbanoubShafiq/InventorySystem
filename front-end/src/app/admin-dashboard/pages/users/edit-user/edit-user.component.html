@@ -1,0 +1,105 @@
+<div class="modal" [class.show]="show" [style.display]="show ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update User</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+            <div class="row mb-2">
+              <div class="col-6">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-control" placeholder="Enter first name"  [(ngModel)]="userData.firstName" name="firstName"
+                      required  minlength="3" pattern="^[A-Za-z]+$" #firstName="ngModel" [class.is-invalid]="firstName.invalid && firstName.touched">
+
+                  <div *ngIf="firstName.invalid && firstName.touched" class="invalid-feedback">
+                      <span *ngIf="firstName.errors?.['required']">First name is required.</span>
+                      <span *ngIf="firstName.errors?.['minlength']">First name must be at least 3 characters long.</span>
+                      <span *ngIf="firstName.errors?.['pattern']">First name can only contain letters.</span>
+                  </div>
+              </div>
+                
+              <div class="col-6">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-control" placeholder="Enter last name" [(ngModel)]="userData.lastName"
+                    name="lastName" required minlength="3" pattern="^[A-Za-z]+$" #lastName="ngModel" 
+                    [class.is-invalid]="lastName.invalid && lastName.touched">
+
+                  <div *ngIf="lastName.invalid && lastName.touched" class="invalid-feedback">
+                    <span *ngIf="lastName.errors?.['required']">Last name is required.</span>
+                    <span *ngIf="lastName.errors?.['minlength']">Last name must be at least 3 characters long.</span>
+                    <span *ngIf="lastName.errors?.['pattern']">Last name can only contain letters.</span>
+                  </div>
+                </div>                  
+            </div>
+
+            <div class="mb-2">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="Email" [(ngModel)]="userData.email" name="Email"
+                  required email #Email="ngModel" [class.is-invalid]="Email.invalid && Email.touched">
+
+              <div *ngIf="Email.invalid && Email.touched" class="invalid-feedback">
+                  <span *ngIf="Email.errors?.['required']">Email is required.</span>
+                  <span *ngIf="Email.errors?.['email']">Please enter a valid email address.</span>
+              </div>
+            </div>
+
+            <div class="row mb-2">
+              <div class="col-6">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-control" placeholder="Enter password" [(ngModel)]="userData.password" 
+                name="Password" required minlength="8"
+                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&&#35;]).*$"
+                #Password="ngModel"
+                [class.is-invalid]="Password.invalid && Password.touched">
+
+                <div *ngIf="Password.invalid && Password.touched" class="invalid-feedback">
+                  <span *ngIf="Password.errors?.['required']">Password is required.</span>
+                  <span *ngIf="Password.errors?.['minlength']">Password must be at least 8 characters long.</span>
+                  <span *ngIf="Password.errors?.['pattern']">
+                    Password must include:
+                    <ul class="mb-0">
+                      <li>One uppercase letter (A-Z)</li>
+                      <li>One lowercase letter (a-z)</li>
+                      <li>One number (0-9)</li>
+                      <li>One special character (&#64;$!%*?&&#35;)</li>
+                    </ul>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <label class="form-label">Phone</label>
+                <input type="text" class="form-control" placeholder="Phone"
+                    [(ngModel)]="userData.contactNo" name="Phone" required #Phone="ngModel"
+                    pattern="^[0-9]{10,15}$"
+                    [class.is-invalid]="Phone.invalid && Phone.touched">
+                
+                <div *ngIf="Phone.invalid && Phone.touched" class="invalid-feedback">
+                    <span *ngIf="Phone.errors?.['required']">Phone number is required.</span>
+                    <span *ngIf="Phone.errors?.['pattern']">Enter a valid phone number (10-15 digits).</span>
+                </div>
+              </div>
+            </div>
+    
+          <app-upload (imagesUploaded)="onImagesUploaded($event)"></app-upload>
+          <div *ngIf="userData.image" class="d-flex flex-wrap gap-2">
+            <div *ngFor="let image of userData.image; let i = index" class="position-relative">
+              <img [src]="userData.image" width="50" height="50">
+              <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage()">
+                ×
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Update User</button>
+          </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

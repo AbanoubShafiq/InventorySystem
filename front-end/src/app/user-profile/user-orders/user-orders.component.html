@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="fw-bold">User Orders</h4>
+      <button class="btn btn-primary" routerLink="/home">
+        <i class="fa fa-plus"></i> Add Order
+      </button>
+    </div>
+
+<div class="mb-3 p-3 bg-light rounded shadow-sm">
+    <h5 class="fw-bold">Order Summary</h5>
+    <p><strong>Total Orders:</strong> {{noOfOrder}}</p>
+    <p><strong>Total Spent:</strong> <span class="text-primary fw-bold">$ {{totalSpend}}</span></p>
+  </div>
+
+  <div class="mb-3 p-3 bg-white rounded shadow-sm">
+    <h5 class="fw-bold">Orders</h5>
+    <ul class="list-group">
+      <li *ngIf="userOrder.length === 0" class="list-group-item text-center">
+        No orders available.
+      </li>
+      <li *ngFor="let order of userOrder" class="list-group-item d-flex justify-content-between align-items-center">
+        <span>Order #{{ order.customerDetails.email }} - ${{ order.totalPrice }}</span>
+        <button class="btn btn-primary btn-sm view-order" (click)="viewOrder(order)">
+          View Details
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>
+

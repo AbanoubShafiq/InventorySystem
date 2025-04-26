@@ -1,0 +1,42 @@
+.page {
+    color: white;
+    padding: 0 1rem;
+    background: #f1f5f9;
+  }
+  
+  .page__box {
+    min-height: 120px;
+    background: #000072;
+    margin: 0 -1rem;
+    font-size: 36px;
+    padding: 2rem;
+  }
+  
+  .page__content {
+    min-height: calc(100vh - 178px);
+    border-radius: 10px;
+    margin-top: -3rem;
+    background: white;
+    color: black;
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  /* .page__content-data {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  } */
+  .chart {
+    width: 50px;
+  }
+  /* ngx-charts-line-chart, 
+ngx-charts-bar-vertical, 
+ngx-charts-pie-chart {
+  display: block;
+  margin-bottom: 30px;
+} */
+
+  

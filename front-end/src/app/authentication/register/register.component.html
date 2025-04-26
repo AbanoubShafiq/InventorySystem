@@ -1,0 +1,132 @@
+<div id="main-wrapper" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            <div class="card border-0">
+                <div class="card-body p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6">
+                            <div class="p-5" id="dataBlock">
+                                <div class="mb-5">
+                                    <h3 class="h4 font-weight-bold text-theme">Register</h3>
+                                </div>
+								<h6 class="h5 mb-0">Join us!</h6>
+								<p class="text-muted mt-2 mb-5">Enter your details to create a new account.</p>
+								
+								<form [formGroup]="registerForm">
+									<div class="form-group">
+									  <label for="firstName">First Name</label>
+									  <input type="text"
+											 class="form-control"
+											 formControlName="firstName"
+											 id="firstName"
+											 placeholder="First Name">
+									  <div class="text-danger mt-1" *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">
+										<small *ngIf="registerForm.controls['firstName'].hasError('required')">First Name is required.</small>
+									  </div>
+									</div>
+								  
+									<div class="form-group">
+									  <label for="lastName">Last Name</label>
+									  <input type="text"
+											 class="form-control"
+											 formControlName="lastName"
+											 id="lastName"
+											 placeholder="Last Name">
+									  <div class="text-danger mt-1" *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched">
+										<small *ngIf="registerForm.controls['lastName'].hasError('required')">Last Name is required.</small>
+									  </div>
+									</div>
+								  
+									<div class="form-group">
+									  <label for="email">Email address</label>
+									  <input type="email"
+											 name="email"
+											 class="form-control"
+											 placeholder="Email"
+											 formControlName="email"
+											 id="email">
+									  <div class="text-danger mt-1" *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+										<small *ngIf="registerForm.controls['email'].hasError('required')">Email is required.</small>
+										<small *ngIf="registerForm.controls['email'].hasError('email')">Please enter a valid email.</small>
+									  </div>
+									  @if(errorMessage != "")
+									  {
+  
+									  <div class="text-danger">
+										  <small>{{this.errorMessage}}</small>
+									  </div>
+									  }
+									</div>
+								  
+									<div class="form-group">
+									  <label for="password">Password</label>
+									  <input type="password"
+											 class="form-control"
+											 id="password"
+											 placeholder="Password"
+											 name="password"
+											 formControlName="password">
+									  <div class="text-danger mt-1" *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+										<small *ngIf="registerForm.controls['password'].hasError('required')">Password is required.</small>
+										<small *ngIf="registerForm.controls['password'].hasError('pattern')">
+										  Password must be at least 8 characters and include uppercase, lowercase, a number, and a special character.
+										</small>
+									  </div>
+									</div>
+								  
+									<div class="form-group">
+									  <label for="confirmPassword">Confirm Password</label>
+									  <input type="password"
+											 class="form-control"
+											 id="confirmPassword"
+											 name="confirmPassword"
+											 placeholder="Confirm Password"
+											 formControlName="confirmPassword">
+									  <!-- <div class="text-danger mt-1" *ngIf="registerForm.controls['confirmPassword'].invalid && registerForm.controls['confirmPassword'].touched">
+										<small *ngIf="registerForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</small>
+									</div> -->
+
+									<div class="text-danger mt-1" *ngIf="registerForm.controls['confirmPassword'].invalid && registerForm.controls['confirmPassword'].touched">
+										<small *ngIf="registerForm.controls['confirmPassword'].hasError('required')">Confirm Password is required.</small>
+										<small *ngIf="registerForm.controls['confirmPassword'].hasError('mismatch')">Passwords do not match.</small>
+									</div>
+									
+
+								</div>
+
+								  
+									<button (click)="register()" type="submit" [disabled]="registerForm.invalid" class="btn btn-theme mt-3">Register</button>
+								  </form>
+								  
+								  
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 d-none d-lg-inline-block">
+                            <div class="account-block rounded-right">
+                                <div class="overlay rounded-right"></div>
+                                <div class="account-testimonial">
+                                    <h4 class="text-white mb-4">Experience the Essence of Luxury!</h4>
+                                    <p class="lead text-white">"Joining our perfume community was effortless. Whether it's logging in, registering, or resetting my password, the process is always smooth and user-friendly."</p>
+                                    <p>- Satisfied Member</p>
+                                </div>
+							</div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- end card-body -->
+            </div>
+            <!-- end card -->
+
+            <p class="text-muted text-center mt-3 mb-0">Already Have Account <a routerLink="/user/login" class="text-primary ml-1">login</a></p>
+
+            <!-- end row -->
+
+        </div>
+        <!-- end col -->
+    </div>
+    <!-- Row -->
+</div>

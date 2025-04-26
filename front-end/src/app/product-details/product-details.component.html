@@ -1,0 +1,162 @@
+<!-- Loading Indicator -->
+<div *ngIf="loading" class="text-center py-5">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<!-- Product Details -->
+<div *ngIf="!loading" class="container py-5">
+  <div class="row">
+    <!-- Product Image -->
+    <div class="col-md-6 text-center">
+      <img [src]="product.productImage[0]" alt="{{ product.productName }}" class="img-fluid rounded shadow-sm" style="max-height: 400px;">
+    </div>
+    <!-- Product Information -->
+    <div class="col-md-6">
+      <h2 class="mb-3">{{ product.productName }}</h2>
+      <p class="fw-bold fs-4">${{ product.productPrice.toFixed(2) }}</p>
+      <p class="text-muted">{{ product.productCategory  }}</p>
+      <p>{{ product.productDescription }}</p>
+
+      <!-- Ratings Section -->
+      <!-- <div class="mt-4">
+        <h5 class="mb-3">Customer Rating</h5>
+        <div class="rating d-flex align-items-center">
+          <span *ngFor="let star of Array(Math.floor(perfume.rating)).fill(0)">
+            <i class="bi bi-star-fill text-warning"></i>
+          </span>
+          <span *ngIf="perfume.rating % 1 !== 0">
+            <i class="bi bi-star-half text-warning"></i>
+          </span>
+          <span *ngFor="let star of Array(5 - Math.ceil(perfume.rating)).fill(0)">
+            <i class="bi bi-star text-muted"></i>
+          </span>
+          <span class="ms-2 text-muted">({{ perfume.reviews.length }} reviews)</span>
+        </div>
+      </div> -->
+
+      <!-- Quantity Section -->
+      <div class="mt-4">
+        <h5 class="mb-3">Quantity</h5>
+        <div class="input-group">
+          <button 
+            type="button" 
+            class="btn btn-outline-secondary rounded-start" 
+            (click)="decreaseQuantity()" 
+            [disabled]="quantity <= 0"
+            [class.opacity-50]="quantity <= 0"
+            title="Decrease Quantity">
+
+            <i class="bi bi-dash"></i>
+          </button>
+          <input 
+            type="number" 
+            class="form-control text-center" 
+            [(ngModel)]="quantity" 
+            min="1" 
+            readonly 
+            style="max-width: 60px;"
+          >
+          <!-- Increase Button -->
+          <button 
+          type="button" 
+          class="btn btn-outline-secondary rounded-end" 
+          (click)="increaseQuantity()" 
+          [disabled]="quantity >= (product.productQuantity || 0)+1"
+          title="Increase Quantity">
+
+          <i class="bi bi-plus"></i>
+          </button>
+
+        </div>
+      </div>
+
+      <br>
+
+      <!-- Add to Cart Button -->
+      <button 
+        class="btn btn-primary btn-lg w-100 mb-4" 
+        (click)="addToCart()" 
+
+        
+        [disabled]="quantity <= 0"
+
+        [class.opacity-50]="product.productQuantity <= 0"
+      >
+        {{ product.productQuantity > 0 ? 'Add to Cart' : 'Out of Stock' }}
+      </button>
+
+      <!-- Back to Catalog Button -->
+      <!-- <a routerLink="/catalog" class="btn btn-outline-secondary w-100">Back to Catalog</a> -->
+      <button (click)="goBackToCatalog()" class="btn btn-outline-secondary w-100">
+        Back to Catalog
+      </button>
+    
+    </div>
+  </div>
+
+  <!-- Comments Section -->
+  <!-- <section class="mt-5">
+    <h3 class="mb-4">Customer Reviews</h3>
+    <div class="review" *ngFor="let review of perfume.reviews">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <strong>{{ review.customerName }}</strong>
+        <div class="rating">
+          <span *ngFor="let star of Array(review.rating).fill(0)">
+            <i class="bi bi-star-fill text-warning"></i>
+          </span>
+          <span *ngFor="let star of Array(5 - review.rating).fill(0)">
+            <i class="bi bi-star text-muted"></i>
+          </span>
+        </div>
+      </div>
+      <p>{{ review.comment }}</p>
+      <hr>
+    </div>
+    <div *ngIf="perfume.reviews.length === 0" class="text-muted text-center mt-4">
+      No reviews yet. Be the first to leave a review!
+    </div>
+  </section> -->
+
+  <!-- Add Review Section -->
+  <section class="mt-5">
+    <h3 class="mb-4">Leave a Review</h3>
+    <form (ngSubmit)="submitReview()" #reviewForm="ngForm">
+      <!-- Rating Selection -->
+      <div class="mb-3">
+        <label class="form-label">Your Rating:</label>
+        <div class="d-flex align-items-center rating">
+          <span *ngFor="let star of Array(5).fill(0); let i = index" (click)="setRating(i + 1)">
+            <i class="bi bi-star-fill text-warning" [class.text-muted]="userRating < i + 1"></i>
+          </span>
+        </div>
+        <small class="text-danger" *ngIf="!userRating && reviewForm.submitted">Please select a rating.</small>
+      </div>
+      <!-- Comment Input -->
+      <div class="mb-3">
+        <label for="comment" class="form-label">Your Comment:</label>
+        <textarea 
+          id="comment" 
+          name="comment" 
+          class="form-control" 
+          rows="4" 
+          [(ngModel)]="userComment" 
+          required
+        ></textarea>
+        <small class="text-danger" *ngIf="!userComment && reviewForm.submitted">Please enter a comment.</small>
+      </div>
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="!userRating || !userComment">
+        Submit Review
+      </button>
+    </form>
+  </section>
+</div>
+
+<!-- Error Message -->
+<div *ngIf="!loading && !perfume" class="text-center py-5">
+  <h3>Product Not Found</h3>
+  <p>The product you are looking for does not exist.</p>
+  <a routerLink="/catalog" class="btn btn-primary">Go Back to Catalog</a>
+</div>

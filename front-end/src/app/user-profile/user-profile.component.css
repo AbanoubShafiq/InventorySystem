@@ -1,0 +1,125 @@
+body {
+    background: rgb(99, 39, 120)
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
+}
+
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
+}
+
+.profile-button:hover {
+    background: #682773
+}
+
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
+}
+
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
+}
+
+.back:hover {
+    color: #682773;
+    cursor: pointer
+}
+
+.labels {
+    font-size: 11px
+}
+
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
+}
+
+.order-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust spacing */
+}
+
+.order-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.order-card {
+    min-height: 250px; /* Adjust as needed */
+}
+
+
+.order-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.order-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Make sure body and html fill the viewport */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  
+  /* Full-height clickable sections */
+  .full-page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full screen height */
+    text-decoration: none;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Complaints Section */
+  .complaints {
+    background-image: url('./../../../assets/complaint/complaint.jpg');
+  }
+  
+  /* Orders Section */
+  .orders {
+    background-image: url('./../../../assets/orders/orders.jpg');
+  }
+  
+  /* Dark overlay for better text readability */
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Text Styling */
+  .text {
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  /* Hover effect */
+  .full-page-link:hover {
+    transform: scale(1.02);
+  }
+  
