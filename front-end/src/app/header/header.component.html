@@ -1,0 +1,226 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm position-sticky top-0 zz" >
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="/home">
+        <img 
+          src="assets/loading.png" 
+          alt="Logo" 
+          class="d-inline-block align-text-top me-2" 
+          style="max-height: 40px;"
+        />
+        <span class="fw-bold fs-4">Fragrance Bar</span>
+      </a>
+      
+  
+      <!-- Toggle Button for Mobile -->
+      <button 
+        class="navbar-toggler border-0" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarContent" 
+        aria-controls="navbarContent" 
+        aria-expanded="false" 
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar Content -->
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active" 
+            [class.selected]="selected === 'home'"             
+            (click)="updateSelect('home')"
+            >Home</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/catalog" routerLinkActive="active" 
+            [class.selected]="selected === 'products'" 
+            (click)="updateSelect('Products')"
+            >Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about" routerLinkActive="active" 
+            [class.selected]="selected === 'about-us'" 
+            (click)="updateSelect('about-us')"
+            >About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/contact" routerLinkActive="active" 
+            [class.selected]="selected === 'contact-us'" 
+            (click)="updateSelect('contact-us')"
+            >Contact Us</a>
+          </li>         
+            
+        </ul>
+  
+        <!-- User Dropdown -->
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a 
+              class="nav-link dropdown-toggle text-dark" 
+              href="#" 
+              id="userDropdown" 
+              role="button" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false"
+            >
+              <i class="bi bi-person-circle fs-4 me-2"></i> 
+              <span *ngIf="userFirstName">{{ userFirstName }}</span>
+              <span *ngIf="!userFirstName">REGISTER</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end rounded-3 shadow-sm" aria-labelledby="userDropdown">
+              <li *ngIf="userRole"><a class="dropdown-item" routerLink="/user/userprofile"><i class="bi bi-person me-2"></i> User Profile</a></li>
+              <li *ngIf="userRole === 'admin'"><a class="dropdown-item" routerLink="/admindashboard"><i class="bi bi-speedometer2 me-2"></i>Admin Dashboard</a></li>
+              <li *ngIf="userRole === 'Casheir'"><a class="dropdown-item" routerLink="/casheir"><i class="bi bi-clock-history me-2"></i> History</a></li>
+              <li *ngIf="userRole === 'seller'" ><a class="dropdown-item" routerLink="/sellerdashboard"><i class="bi bi-speedometer2 me-2"></i> Seller Dashboard</a></li>
+              <li *ngIf="userRole === 'customer'"><a class="dropdown-item" routerLink="/userprofile"><i class="bi bi-clock-history me-2"></i> History</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li ><a class="dropdown-item" (click)="LogOut()"><i class="bi bi-box-arrow-right me-2"></i> Logout</a></li>
+              <li *ngIf="!userRole"><a class="dropdown-item" routerLink="/user/login"><i class="bi bi-box-arrow-right me-2"></i> login</a></li>
+              <li *ngIf="!userRole"><a class="dropdown-item" routerLink="/user/register"><i class="bi bi-pencil-square me-2"></i> Register</a></li>
+            </ul>
+            
+          </li>
+  
+          <!-- Cart Icon -->
+          <li class="nav-item ms-3">
+            <button 
+              class="btn btn-outline-primary rounded-pill px-3 py-2 d-flex align-items-center" 
+              type="button" 
+              data-bs-toggle="offcanvas" 
+              data-bs-target="#cartOffcanvas" 
+              aria-controls="cartOffcanvas"
+            >
+              <i class="bi bi-cart fs-4 me-2"></i> Cart <span class="badge bg-primary rounded-pill ms-2">{{ getCartItemCount() }}</span>
+            </button>
+          </li>
+
+
+
+          <!-- <li class="nav-item ms-3">
+            <button 
+              class="btn btn-outline-primary rounded-pill px-3 py-2 d-flex align-items-center" 
+              type="button" 
+              data-bs-toggle="offcanvas" 
+              data-bs-target="#cartOffcanvas" 
+              aria-controls="cartOffcanvas"
+              (click)="loadCart()"  
+            >
+              <i class="bi bi-cart fs-4 me-2"></i> Cart 
+              <span class="badge bg-primary rounded-pill ms-2">{{ getCartItemCount() }}</span>
+            </button>
+          </li> -->
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+<!-- Offcanvas for Cart -->
+<div 
+  class="offcanvas offcanvas-end rounded-0" 
+  tabindex="-1" 
+  id="cartOffcanvas" 
+  aria-labelledby="cartOffcanvasLabel"
+>
+  <div class="offcanvas-header border-bottom" style="border-radius: 30px; width:90%; margin: auto;">
+    <h5 class="offcanvas-title" id="cartOffcanvasLabel">Shopping Cart</h5>
+    <button 
+      type="button" 
+      class="btn-close text-reset" 
+      data-bs-dismiss="offcanvas" 
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body p-4">
+    <!-- Empty Cart Message -->
+    <p *ngIf="cartItems.length === 0" class="text-muted text-center">Your cart is empty.</p>
+    <!-- Cart Items List -->
+<ul class="list-group list-group-flush" *ngIf="cartItems.length > 0">
+  <li 
+    class="list-group-item d-flex flex-column py-2" 
+    *ngFor="let item of cartItems; let i = index"
+  >
+    <!-- First Row: Product Image, Details, Quantity Controls, and Remove Button -->
+    <div class="d-flex align-items-center">
+      <!-- Product Image -->
+      <img 
+        [src]="item.image" 
+        alt="{{ item.name }}" 
+        class="rounded me-3" 
+        style="width: 60px; height: 60px; object-fit: cover;"
+      />
+
+      <!-- Product Details -->
+      <div class="flex-grow-1 me-3">
+        <!-- <span class="fw-bold">{{ item.product.name }}</span><br> -->
+        <span class="fw-bold">{{ item.name }}</span><br>
+        <small class="text-muted">${{ item.price.toFixed(2) }}</small>
+      </div>
+
+      <!-- Quantity Controls -->
+      <div class="d-flex align-items-center gap-2 me-auto"> <!-- Added me-auto -->
+        <button 
+          class="btn btn-sm btn-outline-secondary" 
+          (click)="decreaseQuantity(item)"
+          [disabled]="item.quantity <= 1"
+        >
+          <i class="bi bi-dash"></i>
+        </button>
+        <span class="fw-bold">{{ item.quantity }}</span>
+        <button 
+          class="btn btn-sm btn-outline-secondary" 
+          (click)="increaseQuantity(item)"
+        >
+          <i class="bi bi-plus"></i>
+        </button>
+      </div>
+
+      <!-- Remove Button -->
+      <button class="btn btn-sm btn-danger ms-3"  
+        (click)="removeFromCart(i)"
+        title="Remove from cart"
+        style="height: 30px; width: 30px; display: flex; align-items: center; justify-content: center;"
+      >
+        <i class="bi bi-trash fs-6"></i>
+      </button>
+    </div>
+
+    <!-- Second Row: Total Price -->
+    <div class="d-flex justify-content-end mt-1">
+      <span class="fw-bold">${{ (item.price * item.quantity).toFixed(2) }}</span>
+    </div>
+  </li>
+</ul>
+
+    
+       
+
+    <!-- Total Amount Section -->
+    <div class="mt-4 border-top pt-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="fw-bold fs-5">Total:</span>
+        <span class="fw-bold fs-5">${{ calculateTotal().toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <!-- Buttons at the Bottom -->
+    <div class="mt-4 d-flex gap-2" *ngIf="cartItems.length > 0">
+      <button 
+        class="btn btn-primary w-100" 
+        routerLink="/checkout"
+      >
+        Checkout
+      </button>
+      <button 
+        class="btn btn-outline-primary w-100" 
+        routerLink="/cart"
+      >
+        View Cart
+      </button>
+    </div>
+  </div>
+</div>

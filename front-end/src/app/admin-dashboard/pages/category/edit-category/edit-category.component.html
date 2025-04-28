@@ -1,0 +1,54 @@
+<div class="modal" [class.show]="show" [style.display]="show ? 'block' : 'none'">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Update Category</h5>
+          <button type="button" class="btn-close" (click)="onClose()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+            <div class="mb-2">
+                <label class="form-label">Name</label>
+                <input type="text" class="form-control" placeholder="name"  [(ngModel)]="categoryData.name" name="Name"
+                    required  minlength="3" pattern="^[A-Za-z]+$" #Name="ngModel" [class.is-invalid]="Name.invalid && Name.touched">
+
+                <div *ngIf="Name.invalid && Name.touched" class="invalid-feedback">
+                    <span *ngIf="Name.errors?.['required']">name is required.</span>
+                    <span *ngIf="Name.errors?.['minlength']">name must be at least 3 characters long.</span>
+                    <span *ngIf="Name.errors?.['pattern']">name can only contain letters.</span>
+                </div>
+            </div>
+
+
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" [(ngModel)]="categoryData.description" name="description" rows="3" 
+                    required minlength="10" maxlength="500" #description="ngModel"
+                    [class.is-invalid]="description.invalid && description.touched"></textarea>
+            
+                <div *ngIf="description.invalid && description.touched" class="invalid-feedback">
+                    <span *ngIf="description.errors?.['required']">Description is required.</span>
+                    <span *ngIf="description.errors?.['minlength']">Description must be at least 10 characters.</span>
+                    <span *ngIf="description.errors?.['maxlength']">Description cannot exceed 500 characters.</span>
+                </div>
+              </div>
+    
+          <app-upload (imagesUploaded)="onImagesUploaded($event)"></app-upload>
+          <div *ngIf="categoryData.image" class="d-flex flex-wrap gap-2">
+            <div *ngFor="let image of categoryData.image; let i = index" class="position-relative">
+              <img [src]="categoryData.image" width="50" height="50">
+              <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage()">
+                ×
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!editForm.valid">Update Category</button>
+          </div>
+  
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

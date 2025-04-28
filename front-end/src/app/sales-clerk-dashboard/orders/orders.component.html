@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3>Branch Orders</h3>
+        <div class="d-flex gap-3">
+          <input type="text" 
+                 class="form-control" 
+                 placeholder="Search orders..."
+                 [(ngModel)]="searchTerm">
+          <select class="form-select" [(ngModel)]="statusFilter">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="completed">Completed</option>
+            <option value="canceled">Canceled</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <!-- Loading state -->
+      <div *ngIf="loading" class="text-center p-4">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <!-- Error state -->
+      <div *ngIf="error" class="alert alert-danger">
+        {{error}}
+      </div>
+
+      <!-- Data state -->
+      <div *ngIf="!loading && !error" class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Items</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of filteredOrders">
+              <td>{{order._id}}</td>
+              <td>{{getTotalItems(order)}} items</td>
+              <td>{{order.totalPrice | currency}}</td>
+              <td>
+                <span class="badge"
+                      [class.bg-warning]="order.status === 'pending'"
+                      [class.bg-success]="order.status === 'completed'"
+                      [class.bg-danger]="order.status === 'canceled'">
+                  {{order.status}}
+                </span>
+              </td>
+              <td>{{order.date | date:'short'}}</td>
+              <td>
+                <div class="btn-group">
+                  <button class="btn btn-info me-2" 
+                          (click)="openOrderDetails(order)">
+                    View Details
+                  </button>
+                  <button class="btn btn-danger"
+                          *ngIf="order.status === 'pending'"
+                          (click)="cancelOrder(order._id)">
+                    Cancel Order
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

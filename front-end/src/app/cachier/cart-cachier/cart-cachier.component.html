@@ -1,0 +1,94 @@
+ <div class="sidebar-header" style="color: white; background-color:#00003f; width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <p style="margin: 0; font-size: 18px; font-weight: bold;">Casheir</p>
+    <button class="btn back-button" [routerLink]="['/cashier']">Back ></button>
+  </div>
+<div class="container">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-8 cart position-relative">
+          <div *ngIf="cartItems.length === 0" class="empty-cart text-center" style="margin-top: 120px;">
+            <div class="alert alert-warning" role="alert">
+              <p>Your cart is empty.</p>
+            </div>
+          </div>
+          <div class="title">
+            <div class="row" >
+              <div class="col">
+                <h4><b>Shopping Cart</b></h4>
+              </div>
+              <div class="col align-self-center text-right text-muted">
+                {{ cartItems.length }} items 
+              </div>
+            </div>
+          </div>
+  
+          <div class="row border-top border-bottom" *ngFor="let item of cartItems">
+            <div class="row main align-items-center">
+              <div class="col-2">
+                <img class="img-fluid" [src]="item.image" alt="Product Image"/>
+              </div>
+              <div class="col">
+                <div class="row text-muted" style="font-weight: bold; color: #00003f;">{{ item.product.name }}</div>
+                <div class="row" style="font-weight: bold; color: #00003f;">&euro; {{ item.price }}</div>
+                <div class="row">{{ item.product.description }}</div>
+              </div>
+              <div class="col">
+                <button (click)="increaseQuantity(item)" class="btn btn-outline-secondary btn-sm quantity-btn">&#8593;</button>
+                <span class="border" style="font-weight: bold; color: #00003f; margin: auto;">{{ item.quantity }}</span>
+                <button (click)="decreaseQuantity(item)" class="btn btn-outline-secondary btn-sm quantity-btn">&#8595;</button>
+              </div>
+              <button class="btn btn-sm btn-info" style="font-size: 16px;" (click)="showProductDetails(item)">
+                Details
+              </button>
+              <button class="close btn btn-sm" (click)="removeItem(item.subInventory)">
+                &#10005;
+              </button>
+            </div>
+          </div>
+  
+          <div class="back-to-shop btn btn-link btn-sm quantity-btn fixed-bottom-cart" style="font-weight: bold; font-size: 12px;">
+            <a href="#" style="color:#00003f; font-size: 12px; text-decoration: none;">&leftarrow;</a>
+            <span style="font-size: 12px;" class="back">Back </span>
+          </div>
+        </div>
+        <div class="col-md-4 summary">
+          <h5><b>Summary</b></h5>
+          <hr>
+          <div class="row">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of cartItems">
+                  <td>{{ item.product.name }}</td>
+                  <td>&euro; {{ item.price }}</td>
+                  <td>{{ item.quantity }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col">TOTAL PRICE</div>
+            <div class="col text-right">&euro; {{ getTotalPrice().toFixed(2) }}</div>
+          </div>
+          <div class="row">
+            <div class="col">STATUS</div>
+            <div class="col align-self-center text-right text-muted">{{ cartItems.length }} items</div>
+          </div>
+          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+            <div class="col">TOTAL PRICE With Delivery</div>
+            <div class="col text-right">&euro; {{( getTotalPrice() + 5) .toFixed(2)}}</div>
+          </div>
+          <p>EXPECTED DELIVERY TIME: 3-5 Days</p>
+          <button class="btn btn-primary btn-sm checkout" style="width: 100%;" (click)="checkout()">
+            CREATE ORDER
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>

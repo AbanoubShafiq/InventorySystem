@@ -1,0 +1,84 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">Users</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div>
+        <div>
+          <div class="container-fluid p-4">
+            <!-- *********************************************************************** -->
+          <div class="card">
+            
+            <div class="card-body">
+              <div class="row mb-3 justify-content-between">
+                <div class="col-md-4">
+                  <input type="text" 
+                          class="form-control" 
+                          [(ngModel)]="searchTerm" 
+                          (input)="onSearch()"
+                          placeholder="Search Users...">
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" 
+                          [(ngModel)]="statusFilter" 
+                          (change)="onStatusFilterChange()">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+        
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th (click)="sort('name')" style="cursor: pointer" class="justify-content-between">
+                        Product
+                        <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                      </th>
+                      <th>User</th>
+                      <th>Rate</th>
+                      <th>Comment</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of filteredUsers">
+                      <td>{{user.name}}</td>
+                      <td>{{user.email}}</td>
+                      <td>${{user.address}}</td>
+                      <td>{{user.phone}}</td>
+                      <td>
+                        <span class="badge" [ngClass]="user.status ? 'bg-success' : 'bg-danger'">
+                          {{user.status ? ' Active ' : 'Inactive'}}
+                        </span>
+                      </td>
+                      <td>
+                        <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                          <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="bg-white ">
+                          <button mat-menu-item [routerLink]="['edit', user._id]">
+                            <mat-icon>edit</mat-icon>
+                            Update
+                          </button>
+                          <button mat-menu-item (click)="deleteUser(user._id)">
+                            <mat-icon>delete</mat-icon>
+                            Delete
+                          </button>
+                          <button mat-menu-item>
+                            <mat-icon>close</mat-icon>
+                            {{user.status ? ' Inactive ' : 'Active'}}
+                          </button>
+                        </mat-menu>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,101 @@
+.card {
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+  }
+  
+  .table th {
+    background-color: #f8f9fa;
+    cursor: pointer;
+  }
+  
+  .table th i {
+    margin-left: 5px;
+  }
+  
+  .badge {
+    padding: 0.5em 0.75em;
+  }
+  
+  .form-control, .form-select {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  }  
+  .btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Modal Styles */
+  .modal {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-backdrop {
+    z-index: 1040;
+  }
+  
+  .modal {
+    z-index: 1050;
+  }
+  
+  .modal-dialog {
+    margin-top: 50px;
+  }
+  
+  .modal-content {
+    border-radius: 8px;
+  }
+  
+  .modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+  }
+
+  .product-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    transition: transform 0.2s ease-in-out;
+    min-width: 50px; /* Prevent layout shift */
+    min-height: 50px; /* Prevent layout shift */
+  }
+
+  .product-thumbnail:hover {
+    transform: scale(1.1);
+  }
+
+  /* Remove loading animation to prevent flickering */
+  .table td {
+    vertical-align: middle;
+    min-height: 60px; /* Prevent layout shift */
+  }
+
+  /* Add a subtle skeleton loading effect */
+  .loading .product-thumbnail {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }

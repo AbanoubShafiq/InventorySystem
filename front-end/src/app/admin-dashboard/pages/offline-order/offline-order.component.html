@@ -1,0 +1,125 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">{{orderOfflineData.branch.branchName}} Orders</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div>
+        <div>
+          <div class="container-fluid p-4">
+            <!-- Stats Cards -->
+            <div class="row mb-4 text-center justify-content-around">
+              <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Orders {{orderOfflineData.branch.branchName}}</h5>
+                    <p class="card-text display-4">{{orderOfflines.length}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Completed Orders {{orderOfflineData.branch.branchName}}</h5>
+                    <p class="card-text display-4">{{completedOrderOfflinesCount}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Canceled Orders {{orderOfflineData.branch.branchName}}</h5>
+                    <p class="card-text display-4">{{canceledOrderOfflinesCount}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- *********************************************************************** -->
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0"></h3>
+                </div>
+                <div class="col-auto">
+                  <!-- <button class="btn btn-primary" (click)="openAddModal()">
+                    Add User
+                  </button> -->
+                  <app-details-offline-order
+                    [show]="showDetailsModal" 
+                    [orderOfflineData]="orderOfflineData" 
+                    (close)="showDetailsModal = false" >
+                  </app-details-offline-order>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="row mb-3 justify-content-between">
+                <div class="col-md-4">
+                  <input type="text" 
+                          class="form-control" 
+                          [(ngModel)]="searchTerm" 
+                          (input)="onSearch()"
+                          placeholder="Search offlineOrders...">
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" 
+                          [(ngModel)]="statusFilter" 
+                          (change)="onStatusFilterChange()">
+                    <option value="all">All Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="canceled">Canceled</option>
+                  </select>
+                </div>
+              </div>
+        
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Items</th>
+                        <th>Total Price</th>
+                        <th (click)="sort('date')" style="cursor: pointer" class="justify-content-between">
+                          Date
+                          <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                        </th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let orderOffline of orderOfflines">
+                      <td>{{orderOffline._id}}</td>
+                      <td>{{orderOffline.items.length}} item</td>
+                      <td>{{orderOffline.totalPrice}}</td>
+                      <td>{{orderOffline.date}}</td>
+                      <td>
+                        <span class="badge" [ngClass]="orderOffline.status === 'completed' ? 'bg-success' : 'bg-danger'">
+                            {{ orderOffline.status === 'canceled' ? 'canceled' : 'completed' }}
+                          </span>
+                      </td>
+                      <td>
+                        <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                          <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="bg-white ">
+                            <button *ngIf="orderOffline.status !== 'canceled'" mat-menu-item (click)="cancelOrderOffline(orderOffline._id)">
+                                <mat-icon>close</mat-icon>
+                                Cancel
+                              </button>
+                          <button mat-menu-item (click)="openDetailsModal(orderOffline)">
+                            <mat-icon>visibility</mat-icon>
+                            Details
+                          </button>    
+                        </mat-menu>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

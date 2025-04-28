@@ -1,0 +1,106 @@
+<div class="modal" [class.show]="show" [style.display]="show ? 'block' : 'none'">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add New Product</h5>
+        <button type="button" class="btn-close" (click)="onClose()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #addForm="ngForm" novalidate>
+          
+          <!-- Name Field -->
+          <div class="row mb-3">
+            <div class="col-6">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" placeholder="Name"
+                  [(ngModel)]="productData.name" name="name" required 
+                  minlength="3" maxlength="50" pattern="^[A-Za-z0-9 ]+$" #name="ngModel"
+                  [class.is-invalid]="name.invalid && name.touched">
+          
+              <div *ngIf="name.invalid && name.touched" class="invalid-feedback">
+                  <span *ngIf="name.errors?.['required']">Name is required.</span>
+                  <span *ngIf="name.errors?.['minlength']">Name must be at least 3 characters.</span>
+                  <span *ngIf="name.errors?.['pattern']">Only letters, numbers, and spaces are allowed.</span>
+              </div>
+            </div>
+
+            <!-- Category Field -->
+            <div class="col-6">
+              <label class="form-label">Category</label>
+              <select class="form-select" [(ngModel)]="productData.categoryId._id" name="category" required #categoryIdRef="ngModel"
+                  [class.is-invalid]="categoryIdRef.invalid && categoryIdRef.touched">
+                  
+                  <option value="" disabled selected>Select Category</option>
+                  <option *ngFor="let category of categories" [value]="category._id">
+                      {{ category.name }}
+                  </option>
+              </select>
+          
+              <div *ngIf="categoryIdRef.invalid && categoryIdRef.touched" class="invalid-feedback">
+                  Category is required.
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row mb-3">
+            <!-- Price -->
+            <div class="col-6">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" placeholder="Price" [(ngModel)]="productData.price" 
+                  name="price" required min="5" max="10000" step="0.01" #price="ngModel"
+                  [class.is-invalid]="price.invalid && price.touched">
+          
+              <div *ngIf="price.invalid && price.touched" class="invalid-feedback">
+                  <span *ngIf="price.errors?.['required']">Price is required.</span>
+                  <span *ngIf="price.errors?.['min']">Price must be at least 5.</span>
+                  <span *ngIf="price.errors?.['max']">Price cannot exceed 10,000.</span>
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label class="form-label">Quantity</label>
+              <input type="number" class="form-control" placeholder="Quantity" [(ngModel)]="productData.quantity" 
+                  name="quantity" required min="0" step="1" #quantity="ngModel"
+                  [class.is-invalid]="quantity.invalid && quantity.touched">
+          
+              <div *ngIf="quantity.invalid && quantity.touched" class="invalid-feedback">
+                  <span *ngIf="quantity.errors?.['required']">Quantity is required.</span>
+                  <span *ngIf="quantity.errors?.['min']">Quantity cannot be negative.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" [(ngModel)]="productData.description" name="description" rows="3" 
+                required minlength="10" maxlength="500" #description="ngModel"
+                [class.is-invalid]="description.invalid && description.touched"></textarea>
+        
+            <div *ngIf="description.invalid && description.touched" class="invalid-feedback">
+                <span *ngIf="description.errors?.['required']">Description is required.</span>
+                <span *ngIf="description.errors?.['minlength']">Description must be at least 10 characters.</span>
+                <span *ngIf="description.errors?.['maxlength']">Description cannot exceed 500 characters.</span>
+            </div>
+          </div>
+        
+          <app-upload (imagesUploaded)="onImagesUploaded($event)"></app-upload>
+          <div *ngIf="productData.images.length" class="d-flex flex-wrap gap-2">
+              <div *ngFor="let image of productData.images; let i = index" class="position-relative">
+                <img [src]="productData.images" width="50" height="50">
+                <button type="button" class="btn btn-sm btn-danger position-absolute top-0 end-0" (click)="removeImage(i)">
+                  ×
+                </button>
+              </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!addForm.form.valid">Add Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+/* Loading Screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa; /* Light gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it overlays other content */
+  }
+  
+  /* Animation Container */
+  .animation-container {
+    text-align: center;
+  }
+  
+  /* Perfume Bottle Animation */
+  .perfume-bottle {
+    width: 100px;
+    height: 200px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Messages and Text */
+  .animation-container h2 {
+    font-size: 1.75rem;
+    color: #333; /* Dark gray text */
+  }
+  
+  .animation-container p {
+    font-size: 1rem;
+    color: #6c757d; /* Muted gray text */
+  }
+  
+  /* Page Not Found Section */
+  section {
+    background-color: #f8f9fa; /* Light gray background */
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: #333; /* Dark gray text */
+  }
+  
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #6c757d; /* Muted gray text */
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #007bff; /* Primary blue color */
+    border-color: #007bff;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    border-color: #0056b3;
+  }
+
+  .pho-animation {
+    width: 200px;
+    height: 200px;
+    animation: bounce 2s infinite;
+  }
+  
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  .typing-effect {
+    font-size: 1.5rem;
+    overflow: hidden; /* Ensures the content is not shown until the animation */
+    white-space: nowrap; /* Keeps the content on a single line */
+    width: 30em; /* The width of the element */
+    animation: typing 5s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 40em; }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: black; }
+  }

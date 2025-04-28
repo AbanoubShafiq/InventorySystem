@@ -1,0 +1,18 @@
+.order-info {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .badge {
+    text-transform: capitalize;
+  }
+  
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+  }

@@ -1,0 +1,150 @@
+<div class="container-fluid page">
+    <div class="d-flex page__box p-3 mt-2">{{branchName}} Products</div>
+    <div class="page__content shadow p-3 position-relative">
+      <div>
+        <div>
+          <div class="container-fluid p-4">
+            <!-- Stats Cards -->
+            <div class="row mb-4 text-center justify-content-around">
+              <div class="col-md-3">
+                <div class="card bg-primary text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Total SubInventory</h5>
+                    <p class="card-text display-4">{{subInventories.length}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-success text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Active SubInventory</h5>
+                    <p class="card-text display-4">{{activeSubInventoriessCount}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card bg-danger text-white">
+                  <div class="card-body">
+                    <h5 class="card-title">Inactive SubInventory</h5>
+                    <p class="card-text display-4">{{inactiveSubInventoriesCount}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- *********************************************************************** -->
+          <div class="card">
+            <div class="card-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0"></h3>
+                </div>
+                <div class="col-auto">
+                  <!-- <button class="btn btn-primary" (click)="openAddModal()">
+                    Add User
+                  </button> -->
+                  <!-- <app-add-user 
+                    [show]="showAddModal" 
+                    [userData]="userData" 
+                    (close)="showAddModal = false" 
+                    (saved)="onUserSaved()">
+                  </app-add-user> -->
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-body">
+              <div class="row mb-3 justify-content-between">
+                <div class="col-md-4">
+                  <input type="text" 
+                          class="form-control" 
+                          [(ngModel)]="searchTerm" 
+                          (input)="onSearch()"
+                          placeholder="Search SubInventory...">
+                </div>
+                <div class="col-md-3">
+                  <select class="form-select" 
+                          [(ngModel)]="statusFilter" 
+                          (change)="onStatusFilterChange()">
+                    <option value="all">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
+              </div>
+  
+              <!-- <app-edit-user
+                [show]="showEditModal" 
+                [userData]="userData" 
+                (updated)="onUserUpdated()" 
+                (close)="showEditModal = false">
+              </app-edit-user> -->
+        
+              <div class="table-responsive">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th (click)="sort('product')" style="cursor: pointer" class="justify-content-between">
+                        Name
+                        <mat-icon style="vertical-align: middle;">keyboard_arrow_down</mat-icon>
+                      </th>
+                      <th>Price</th>
+                      <th>Count</th>
+                      <th>Seller</th>
+                      <th>Category</th>
+                      <th>Qty</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let subInventory of filteredSubInventories">
+                        <td><img class="image" src="{{subInventory?.product!.images[0]}}" alt="">{{subInventory?.product?.name}}</td>
+                        <td>{{subInventory?.product?.price}}</td>
+                        <td>{{subInventory?.product?.noOfSale}}</td>
+                        <td>{{subInventory?.product?.sellerId?.firstName}} {{subInventory?.product?.sellerId?.lastName}}</td>
+                        <td>{{subInventory?.product?.categoryId?.name}}</td>
+                        <td>{{subInventory.quantity}}</td>
+                        <td>{{subInventory.lastUpdated}}</td>
+                      <td>
+                        <span class="badge" [ngClass]="subInventory.active ? 'bg-success' : 'bg-danger'">
+                          {{subInventory.active ? ' Active ' : 'Inactive'}}
+                        </span>
+                      </td>
+                      <td>
+                        <button [matMenuTriggerFor]="menu" class="border-0" style="background: none;">
+                          <mat-icon style="vertical-align: middle;">more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu" class="bg-white ">
+                          <!-- <button mat-menu-item (click)="openEditModal(user)">
+                            <mat-icon>edit</mat-icon>
+                            Update
+                          </button> -->
+                          <button mat-menu-item (click)="increaseSubInventoryQuantity(subInventory._id)">
+                            <mat-icon>add</mat-icon>
+                            increase
+                          </button>
+                          <button mat-menu-item (click)="decreaseSubInventoryQuantity(subInventory._id)">
+                            <mat-icon>remove</mat-icon>
+                            decrease
+                          </button>
+                          <button mat-menu-item (click)="deleteSubInventory(subInventory._id)">
+                            <mat-icon>delete</mat-icon>
+                            Delete
+                          </button>
+                          <button mat-menu-item (click)="toggleSubInventoryStatus(subInventory)">
+                            <mat-icon>{{ subInventory.active ? 'close' : 'check' }}</mat-icon>
+                            {{ subInventory.active ? 'Inactive' : 'Active' }}
+                          </button>     
+                        </mat-menu>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

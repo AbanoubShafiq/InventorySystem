@@ -1,0 +1,149 @@
+/* Navbar Styling */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Logo Styling */
+  .navbar-brand img {
+    max-height: 40px;
+  }
+  
+  .navbar-brand span {
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  /* Navigation Links */
+  .navbar-nav .nav-link {
+    font-weight: 500;
+    color: #555 !important;
+    transition: color 0.3s ease;
+    position: relative;
+  }
+  
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    color: #007bff !important; /* Bootstrap primary color */
+  }
+  
+ .navbar-nav .nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: #007bff;
+    transition: width 0.3s ease;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+  }
+  
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .nav-link.active::after {
+    width: 100%;
+  }
+  
+  /* User Dropdown */
+  .dropdown-menu {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dropdown-item {
+    color: #333;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+  }
+  
+  .dropdown-item i {
+    font-size: 1rem;
+  }
+  
+  /* Cart Button */
+  .btn-outline-primary {
+    border-color: #007bff !important;
+    color: #007bff !important;
+    font-weight: 500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #007bff !important;
+    color: white !important;
+  }
+  
+  .badge {
+    font-size: 0.8rem;
+  }
+  
+  /* Offcanvas Styling */
+  .offcanvas {
+    width: 350px;
+  }
+  
+  .offcanvas-header {
+    background: #f8f9fa;
+  }
+  
+  .offcanvas-body {
+    padding: 1.5rem;
+  }
+  
+  .list-group-item {
+    font-size: 0.9rem;
+    border-color: #e9ecef;
+  }
+  
+  .list-group-item span:first-child {
+    font-weight: 500;
+  }
+  
+  /* Buttons at the Bottom */
+  .offcanvas-body .btn {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .offcanvas-body .btn:hover {
+    transform: scale(1.02);
+  }
+  
+  .offcanvas-body .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .offcanvas-body .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+  
+  .offcanvas-body .btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .offcanvas-body .btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  .nav-item:hover{
+    cursor: pointer;
+  }
+  .zz{
+    z-index: 100;
+  }
+
+  .selected{
+    color: gold;
+
+  }
+  body.offcanvas-open {
+    overflow: auto !important; /* Allow scrolling */
+  }
+  

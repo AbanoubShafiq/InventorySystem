@@ -1,0 +1,54 @@
+/* Product Grid */
+
+.product-grid-img {
+  height: 400px; /* Fixed height for all images */
+  object-fit: cover; /* Ensures images are not distorted */
+}
+
+.card {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+/* Pagination */
+.pagination {
+justify-content: center;
+}
+
+.nav-pagination {
+margin-top: 20px;
+}
+
+.page-item .page-link {
+  color: #333;
+  border-color: #ddd;
+}
+
+.page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.page-item.disabled .page-link {
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* Filters and Sorting */
+.form-select {
+  max-width: 200px;
+}
+
+.btn-group .btn {
+  margin-right: 5px;
+}
+
+.btn-group .btn.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

@@ -1,0 +1,44 @@
+.mat-icon {
+    vertical-align: middle;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.3rem;
+  }
+
+.logo {
+  text-align: center;
+  color:white;
+  /* padding: 2.6rem 1rem; */
+}
+
+
+.mat-divider {
+  border-top-width: 2px;
+  border-color: white;
+}
+
+span {
+  color:white !important;
+  height: 44px !important;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+a:hover {
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.list-item-active{
+  background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.subheader {
+  font-size: 1rem;
+  font-weight: 100;
+  letter-spacing: 1px;
+}
+
+.submenu {
+  padding-left: 20px;
+}
