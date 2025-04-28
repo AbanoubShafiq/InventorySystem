@@ -36,7 +36,6 @@ A **multi-tenant inventory management system** supporting both online/offline re
 | **Backend**    | Node.js, Express, JWT, Stripe API |
 | **Database**   | MongoDB, Mongoose (ODM) |
 | **Services**   | Nodemailer, ImageKit, bcryptjs |
-| **DevOps**     | Docker, GitHub Actions |
 
 ## 🏗️ System Architecture
 ```plaintext
